@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Doctors</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Doctors</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Cedula</th>
+                <th>Correo</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Rol</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profesional in response.json %}
+            <tr>
+                <td>{{ profesional.nombre }}</td>
+                <td>{{ profesional.username }}</td>
+                <td>{{ profesional.password }}</td>
+                <td>{{ profesional.cedula }}</td>
+                <td>{{ profesional.correo }}</td>
+                <td>{{ profesional.fechaNacimiento }}</td>
+                <td>{{ profesional.rol }}</td>
+                <td>{{ profesional.especialidad }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
