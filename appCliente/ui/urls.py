@@ -5,4 +5,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("home", views.home, name="home"),
     path("newDoctor", views.newDoctor, name="newDoctor"),
+    path("submitDoctor", views.submitDoctor, name="submitDoctor"),
 ]
