@@ -182,9 +182,9 @@
                 <h3 class="masthead-brand"> </h3>
                 <nav class="nav nav-masthead justify-content-center">
                     <!-- makes a clickable link -->
-                    <a class="nav-link active" href="home">Home</a>
+                    <a class="nav-link" href="home">Home</a>
                     <!-- makes a clickable link -->
-                    <a class="nav-link" href="getDoctors">Medicos</a>
+                    <a class="nav-link active" href="getDoctors">Medicos</a>
                     <!-- makes a clickable link -->
                     <a class="nav-link" href="#">Login</a>
                     <!-- makes a clickable link -->
@@ -196,17 +196,26 @@
         <main role="main" class="inner cover">
             <h1 class="cover-heading">Listado de profesionales registrados</h1>
 
+
             <div class="table-container">
                 <table class="table">
+
                     <thead>
                         <tr>
+                            <th colspan="8">
+                                <center>
+                                    <b>Ultimos 5 profesionales añadidos al sistema</b>
+                                </center>
+                                </tk>
+                        </tr>
+                        <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
                             <th>Cedula</th>
                             <th>Email</th>
-                            <th>Date of Birth</th>
-                            <th>Role</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Posición</th>
                             <th>Especialidad</th>
                         </tr>
                     </thead>
@@ -230,10 +239,14 @@
 
         </main>
 
+
+
         <footer class="mastfoot mt-auto">
 
         </footer>
     </div>
+
+
 
 </body>
 
