@@ -38,7 +38,7 @@ def submitDoctor(request):
 
 
 def getDoctors(request):
-    profesionales = Profesional.objects.all()
+    profesionales = Profesional.objects.order_by("id").reverse()[:5]
 
     print("PROFESIONALES:")
 
