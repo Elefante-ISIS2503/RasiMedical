@@ -187,12 +187,12 @@
 
 
                 <!-- Creates a form -->
-                <form action="submitDoctor" method="post" class="needs-validation">
+                <form action="submitDoctor" method="post">
                     {% csrf_token %}
 
                     <div class="mb-3">
                         <label for="nombre">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="">
+                        <input type="text" class="form-control" id="nombre" placeholder="" name="nombre">
                         <div class="invalid-feedback">
                             Please enter a valid nombre address for shipping updates.
                         </div>
@@ -206,7 +206,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                <input type="text" class="form-control" id="username" placeholder="Username"
+                                    name="username" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -215,7 +216,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="password">Contraseña</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="password" placeholder="Password" required>
+                                <input type="text" class="form-control" id="password" placeholder="Password"
+                                    name="password" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -227,7 +229,8 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="rol">Posición</label>
-                            <input type="text" class="form-control" id="rol" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="rol" placeholder="" value="" name="rol"
+                                required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -235,7 +238,8 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="especialidad">Especilidad</label>
-                            <input type="text" class="form-control" id="especialidad" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="especialidad" placeholder="" value=""
+                                name="especialidad" required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -244,7 +248,8 @@
 
                     <div class="mb-3">
                         <label for="correo">Email</label>
-                        <input type="email" class="form-control" id="correo" placeholder="you@example.com">
+                        <input type="email" class="form-control" id="correo" placeholder="you@example.com" name="correo"
+                            required>
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -256,7 +261,8 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="cedula">Cedula</label>
-                            <input type="number" class="form-control" id="cedula" placeholder="" value="" required>
+                            <input type="number" class="form-control" id="cedula" placeholder="" value="" name="cedula"
+                                required>
                             <div class="invalid-feedback">
                                 Valid cedula is required.
                             </div>
@@ -265,7 +271,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="fechaNacimiento">Fecha de nacimiento</label>
                             <input type="date" class="form-control" id="fechaNacimiento" placeholder="" value=""
-                                required>
+                                name="fechaNacimiento" required>
                             <div class="invalid-feedback">
                                 Valid fecha de nacimiento is required.
 

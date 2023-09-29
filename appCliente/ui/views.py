@@ -11,7 +11,7 @@ def newDoctor(request):
 
 
 def submitDoctor(request):
-    print(request.POST)
+    print("SUBMITTING DOCTOR...")
 
     forumDict = {
         "nombre": request.POST.get("nombre"),
@@ -24,8 +24,10 @@ def submitDoctor(request):
         "especialidad": request.POST.get("especialidad"),
     }
 
+    print(forumDict)
+
     # Make the HTTP POST request to a specific IP address
-    ip_address = "127.0.0.1:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "0.0.0.0:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = f"http://{ip_address}/submitDoctor"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     response = requests.post(url, data=forumDict)
 
@@ -39,11 +41,16 @@ def submitDoctor(request):
     return render(request, "ui/submitDoctor.html", forumDict)
 
 
-def showDoctors(request):
+def getDoctors(request):
     # Make the HTTP GET request to a specific IP address
-    ip_address = "127.0.0.1:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "0.0.0.0:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = f"http://{ip_address}/getDoctors"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     response = requests.get(url)
+
+    print("PROFESIONALES:")
+
+    for profesional in response.json()["profesionales"]:
+        print(profesional)
 
     if response.status_code == 200:
         # do something
@@ -52,4 +59,4 @@ def showDoctors(request):
         # handle error
         pass
 
-    return render(request, "ui/showDoctors.html", response.json())
+    return render(request, "ui/getDoctors.html", response.json())

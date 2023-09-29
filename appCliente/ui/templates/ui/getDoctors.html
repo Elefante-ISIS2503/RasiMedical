@@ -141,6 +141,35 @@
             font-family: 'Merriweather Sans', sans-serif;
             /* Change the font */
         }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #0a9779;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 
@@ -165,12 +194,40 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">RASI Medical</h1>
-            <p class="lead">Esta es una versión de prueba de la página web de Rasi Medical, la cual permite la creación
-                de nuevos profesionales de la salud en la base de datos.</p>
-            <p class="lead">
-                <a href="newDoctor" class="btn btn-lg btn-secondary">Añadir médico</a>
-            </p>
+            <h1 class="cover-heading">Listado de profesionales registrados</h1>
+
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Cedula</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Role</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profesional in profesionales %}
+                        <tr>
+                            <td>{{ profesional.id }}</td>
+                            <td>{{ profesional.nombre }}</td>
+                            <td>{{ profesional.username }}</td>
+                            <td>{{ profesional.cedula }}</td>
+                            <td>{{ profesional.correo }}</td>
+                            <td>{{ profesional.fechaNacimiento }}</td>
+                            <td>{{ profesional.rol }}</td>
+                            <td>{{ profesional.especialidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
         </main>
 
         <footer class="mastfoot mt-auto">
