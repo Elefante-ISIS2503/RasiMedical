@@ -47,3 +47,6 @@ def getDoctors(request):
 
     data = {"profesionales": list(profesionales.values())}
     return JsonResponse(data)
+
+def healthCheck(request):
+    return HttpResponse('ok')
