@@ -1,61 +1,240 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title>Doctors</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>🏥 RASI Medical</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template, it's called cover.css -->
+    <link rel="stylesheet" href="static/cover.css">
+
+    <!-- Custom CSS -->
     <style>
+        /*
+        * Globals
+        */
+
+        /* Links */
+        a,
+        a:focus,
+        a:hover {
+            color: #0a9779;
+            /* Use a medical app color */
+            text-decoration: none;
+            /* Remove underline */
+        }
+
+        /* Custom default button */
+        .btn-secondary,
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            color: #fff;
+            /* Prevent inheritance from `body` */
+            background-color: #0a9779;
+            /* Use a medical app color */
+            border: .05rem solid #0a9779;
+            /* Use a medical app color */
+        }
+
+        /*
+        * Base structure
+        */
+
+        .container {
+            margin: 0 !important;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: #f8f9fa;
+            /* Use a lighter background color */
+        }
+
+        body {
+            color: #333;
+            /* Use a darker text color */
+        }
+
+        .nav-masthead .nav-link {
+            padding: .25rem 1rem;
+            color: #0a9779;
+            /* Use a medical app color */
+            background-color: transparent;
+            text-align: center;
+            /* Center-align the text */
+            border: none;
+            /* Remove border */
+            text-shadow: none;
+        }
+
+        .nav-masthead .nav-link:hover,
+        .nav-masthead .nav-link:focus {
+            background-color: transparent;
+            /* Remove background color on hover/focus */
+
+        }
+
+        .nav-masthead .active {
+            color: #fff;
+            /* Change text color for active link */
+            background-color: #0a9779;
+            /* Change background color for active link */
+        }
+
+        .nav-masthead .active:hover,
+        .nav-masthead .active:focus {
+            background-color: #0a9779;
+            /* Change background color on hover/focus */
+        }
+
+        @media (min-width: 48em) {
+            .masthead-brand {
+                float: left;
+            }
+
+            .nav-masthead {
+                float: right;
+            }
+        }
+
+        /*
+        * Cover
+        */
+        .cover {
+            padding: 0 1.5rem;
+        }
+
+        .cover .btn-lg {
+            padding: .75rem 1.25rem;
+            font-weight: 700;
+        }
+
+        /*
+        * Footer
+        */
+        .mastfoot {
+            color: #333;
+            /* Use a darker text color */
+        }
+
+        /* Sets a nice font style for all headers */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Merriweather', serif;
+            /* Change the font */
+        }
+
+        /* Sets a nice font style for all body text */
+        body {
+            font-family: 'Merriweather Sans', sans-serif;
+            /* Change the font */
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
         table {
-            border-collapse: collapse;
             width: 100%;
+            margin-bottom: 1rem;
+            background-color: #fff;
         }
 
         th,
         td {
+            padding: 0.75rem;
             text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+            border: 1px solid #dee2e6;
         }
 
         th {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #0a9779;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
 
-<body>
-    <h1>Doctors</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Cedula</th>
-                <th>Correo</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Rol</th>
-                <th>Especialidad</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for profesional in response.json %}
-            <tr>
-                <td>{{ profesional.nombre }}</td>
-                <td>{{ profesional.username }}</td>
-                <td>{{ profesional.password }}</td>
-                <td>{{ profesional.cedula }}</td>
-                <td>{{ profesional.correo }}</td>
-                <td>{{ profesional.fechaNacimiento }}</td>
-                <td>{{ profesional.rol }}</td>
-                <td>{{ profesional.especialidad }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<body class="text-center">
+
+    <div class="cover-container d-flex p-3 flex-column flex-row align-items-right" style="width: 100%;">
+        <header class=" masthead mb-auto">
+            <div class="inner">
+                <!-- makes a clickable link -->
+                <h3 class="masthead-brand"> </h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <!-- makes a clickable link -->
+                    <a class="nav-link active" href="home">Home</a>
+                    <!-- makes a clickable link -->
+                    <a class="nav-link" href="getDoctors">Medicos</a>
+                    <!-- makes a clickable link -->
+                    <a class="nav-link" href="#">Login</a>
+                    <!-- makes a clickable link -->
+                    <a class="nav-link" href="#">Info</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Listado de profesionales registrados</h1>
+
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Cedula</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Role</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profesional in profesionales %}
+                        <tr>
+                            <td>{{ profesional.id }}</td>
+                            <td>{{ profesional.nombre }}</td>
+                            <td>{{ profesional.username }}</td>
+                            <td>{{ profesional.cedula }}</td>
+                            <td>{{ profesional.correo }}</td>
+                            <td>{{ profesional.fechaNacimiento }}</td>
+                            <td>{{ profesional.rol }}</td>
+                            <td>{{ profesional.especialidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+
+        <footer class="mastfoot mt-auto">
+
+        </footer>
+    </div>
+
 </body>
 
 </html>
