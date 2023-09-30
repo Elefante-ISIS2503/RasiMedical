@@ -27,7 +27,7 @@ def submitDoctor(request):
     print(forumDict)
 
     # Make the HTTP POST request to a specific IP address
-    ip_address = "0.0.0.0:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = f"http://{ip_address}/submitDoctor"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     response = requests.post(url, data=forumDict)
 
@@ -43,7 +43,7 @@ def submitDoctor(request):
 
 def getDoctors(request):
     # Make the HTTP GET request to a specific IP address
-    ip_address = "0.0.0.0:8080"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = f"http://{ip_address}/getDoctors"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     response = requests.get(url)
 
