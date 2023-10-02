@@ -141,6 +141,35 @@
             font-family: 'Merriweather Sans', sans-serif;
             /* Change the font */
         }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #0a9779;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 
@@ -153,9 +182,9 @@
                 <h3 class="masthead-brand"> </h3>
                 <nav class="nav nav-masthead justify-content-center">
                     <!-- makes a clickable link -->
-                    <a class="nav-link active" href="home">Home</a>
+                    <a class="nav-link" href="home">Home</a>
                     <!-- makes a clickable link -->
-                    <a class="nav-link" href="getDoctors">Medicos</a>
+                    <a class="nav-link active" href="getDoctors">Medicos</a>
                     <!-- makes a clickable link -->
                     <a class="nav-link" href="getInventario">Recursos</a>
                     <!-- makes a clickable link -->
@@ -167,25 +196,55 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">RASI Medical</h1>
-            <p class="lead">Esta es una versión de prueba de la página web de Rasi Medical, la cual permite la creación
-                de nuevos profesionales de la salud y nuevos recursos de inventario en la base de datos.</p>
-            <br><br>
+            <h1 class="cover-heading">Listado de profesionales registrados</h1>
 
-            <p class="lead">
-                <a href="newDoctor" class="btn btn-lg btn-secondary">Añadir profesional de la salud</a>
 
-                <!-- leaves 20 px of vertical space-->
-                <br><br>
+            <div class="table-container">
+                <table class="table">
 
-                <a href="newInventario" class="btn btn-lg btn-secondary">Añadir recurso de inventario</a>
-            </p>
+                    <thead>
+                        <tr>
+                            <th colspan="8">
+                                <center>
+                                    <b>Ultimos 5 recursos añadidos al sistema</b>
+                                </center>
+                                </tk>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Tipo</th>
+                            <th>Descripción</th>
+                            <th>Proveedor</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recurso in recursos %}
+                        <tr>
+                            <td>{{ profesional.id }}</td>
+                            <td>{{ profesional.nombre }}</td>
+                            <td>{{ profesional.cantidad }}</td>
+                            <td>{{ profesional.tipo }}</td>
+                            <td>{{ profesional.proveedor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
         </main>
+
+
 
         <footer class="mastfoot mt-auto">
 
         </footer>
     </div>
+
+
 
 </body>
 

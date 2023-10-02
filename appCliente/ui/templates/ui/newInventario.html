@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>🏥 RASI Medical</title>
-
+    <title>🏥 Crear Recurso de Inventario</title>
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template, it's called cover.css -->
     <link rel="stylesheet" href="static/cover.css">
-
     <!-- Custom CSS -->
     <style>
         /*
@@ -141,52 +137,89 @@
             font-family: 'Merriweather Sans', sans-serif;
             /* Change the font */
         }
+
+        .verticallyCentered {
+            min-height: 95%;
+
+            display: flex;
+            align-items: center;
+
+        }
     </style>
 </head>
 
 <body class="text-center">
-
     <div class="cover-container d-flex p-3 flex-column flex-row align-items-right" style="width: 100%;">
-        <header class=" masthead mb-auto">
+        <header class="masthead mb-auto">
             <div class="inner">
-                <!-- makes a clickable link -->
-                <h3 class="masthead-brand"> </h3>
+                <h3 class="masthead-brand"></h3>
                 <nav class="nav nav-masthead justify-content-center">
-                    <!-- makes a clickable link -->
                     <a class="nav-link active" href="home">Home</a>
-                    <!-- makes a clickable link -->
-                    <a class="nav-link" href="getDoctors">Medicos</a>
-                    <!-- makes a clickable link -->
+                    <a class="nav-link" href="getDoctors">Médicos</a>
                     <a class="nav-link" href="getInventario">Recursos</a>
-                    <!-- makes a clickable link -->
                     <a class="nav-link" href="#">Login</a>
-                    <!-- makes a clickable link -->
                     <a class="nav-link" href="#">Info</a>
                 </nav>
             </div>
         </header>
+        <div class="row verticallyCentered">
+            <div class="col-md-12 order-md-1">
+                <div class="text-center" style="width: 100%;">
+                    <h1 class="cover-heading">Crear Recurso de Inventario</h1>
+                </div>
+                <div style="height: 40px;"></div>
+                <form action="crearRecursoInventario" method="post">
+                    {% csrf_token %}
 
-        <main role="main" class="inner cover">
-            <h1 class="cover-heading">RASI Medical</h1>
-            <p class="lead">Esta es una versión de prueba de la página web de Rasi Medical, la cual permite la creación
-                de nuevos profesionales de la salud y nuevos recursos de inventario en la base de datos.</p>
-            <br><br>
 
-            <p class="lead">
-                <a href="newDoctor" class="btn btn-lg btn-secondary">Añadir profesional de la salud</a>
 
-                <!-- leaves 20 px of vertical space-->
-                <br><br>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="" name="nombre" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" placeholder="" name="cantidad"
+                                required>
+                        </div>
+                    </div>
 
-                <a href="newInventario" class="btn btn-lg btn-secondary">Añadir recurso de inventario</a>
-            </p>
-        </main>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="proveedor">Proveedor</label>
+                            <input type="text" class="form-control" id="proveedor" placeholder="" name="proveedor"
+                                required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="tipo">Tipo</label>
+                            <select class="form-control" id="tipo" name="tipo" required>
+                                <option value="medicamento">Medicamento</option>
+                                <option value="maquinaria">Maquinaria</option>
+                                <option value="equipos de diagnóstico">Equipos de Diagnóstico</option>
+                                <option value="suministros médicos">Suministros Médicos</option>
+                                <option value="mobiliario médico">Mobiliario Médico</option>
+                                <option value="material quirúrgico">Material Quirúrgico</option>
+                                <option value="instrumentos médicos">Instrumentos Médicos</option>
+                                <option value="productos de limpieza">Productos de Limpieza</option>
+                                <option value="equipos de laboratorio">Equipos de Laboratorio</option>
+                                <!-- Agrega más opciones según sea necesario -->
+                            </select>
+                        </div>
 
-        <footer class="mastfoot mt-auto">
 
-        </footer>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" id="descripcion" placeholder="" name="descripcion"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-secondary">Crear Recurso</button>
+                </form>
+            </div>
+        </div>
     </div>
-
 </body>
 
 </html>
