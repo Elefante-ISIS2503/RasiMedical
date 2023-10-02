@@ -10,6 +10,10 @@ def newDoctor(request):
     return render(request, "ui/newDoctor.html")
 
 
+def newInventario(request):
+    return render(request, "ui/newInventario.html")
+
+
 def submitDoctor(request):
     print("SUBMITTING DOCTOR...")
 
@@ -32,13 +36,9 @@ def submitDoctor(request):
     response = requests.post(url, data=forumDict)
 
     if response.status_code == 200:
-        # do something
-        pass
+        return render(request, "ui/submitDoctor.html", forumDict)
     else:
-        # handle error
-        pass
-
-    return render(request, "ui/submitDoctor.html", forumDict)
+        return render(request, "ui/submitDoctorFail.html", forumDict)
 
 
 def getDoctors(request):
@@ -60,3 +60,51 @@ def getDoctors(request):
         pass
 
     return render(request, "ui/getDoctors.html", response.json())
+
+
+def submitInventario(request):
+    print("SUBMITTING INVENTARIO...")
+
+    forumDict = {
+        "nombre": request.POST.get("nombre"),
+        "cantidad": request.POST.get("cantidad"),
+        "tipo": request.POST.get("tipo"),
+        "descripcion": request.POST.get("descripcion"),
+        "proveedor": request.POST.get("proveedor"),
+    }
+
+    print(forumDict)
+
+    # Make the HTTP POST request to a specific IP address
+    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
+    url = (
+        f"http://{ip_address}/submitInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
+    )
+    response = requests.post(url, data=forumDict)
+
+    if response.status_code == 200:
+        return render(request, "ui/submitInventario.html", forumDict)
+
+    else:
+        return render(request, "ui/submitInventarioFail.html", forumDict)
+
+
+def getInventario(request):
+    # Make the HTTP GET request to a specific IP address
+    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
+    url = f"http://{ip_address}/getInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
+    response = requests.get(url)
+
+    print("INVENTARIO:")
+
+    for recurso in response.json()["recursos"]:
+        print(recurso)
+
+    if response.status_code == 200:
+        # do something
+        pass
+    else:
+        # handle error
+        pass
+
+    return render(request, "ui/getInventario.html", response.json())
