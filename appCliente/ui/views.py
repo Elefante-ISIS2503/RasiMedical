@@ -76,7 +76,7 @@ def submitInventario(request):
     print(forumDict)
 
     # Make the HTTP POST request to a specific IP address
-    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "35.241.8.32:80"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = (
         f"http://{ip_address}/submitInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     )
@@ -91,7 +91,7 @@ def submitInventario(request):
 
 def getInventario(request):
     # Make the HTTP GET request to a specific IP address
-    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
+    ip_address = "35.241.8.32:80"  # CAMBIAR ESTO A LA IP DEL BROKER
     url = f"http://{ip_address}/getInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
     response = requests.get(url)
 
