@@ -196,7 +196,7 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">Listado de profesionales registrados</h1>
+            <h1 class="cover-heading">Listado de recursos registrados</h1>
 
 
             <div class="table-container">
@@ -204,7 +204,7 @@
 
                     <thead>
                         <tr>
-                            <th colspan="8">
+                            <th colspan="6">
                                 <center>
                                     <b>Ultimos 5 recursos añadidos al sistema</b>
                                 </center>
@@ -223,11 +223,12 @@
                     <tbody>
                         {% for recurso in recursos %}
                         <tr>
-                            <td>{{ profesional.id }}</td>
-                            <td>{{ profesional.nombre }}</td>
-                            <td>{{ profesional.cantidad }}</td>
-                            <td>{{ profesional.tipo }}</td>
-                            <td>{{ profesional.proveedor }}</td>
+                            <td>{{ recurso.id }}</td>
+                            <td>{{ recurso.nombre }}</td>
+                            <td>{{ recurso.cantidad }}</td>
+                            <td>{{ recurso.tipo }}</td>
+                            <td>{{ recurso.descripcion }}</td>
+                            <td>{{ recurso.proveedor }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
