@@ -101,10 +101,8 @@ def getInventario(request):
         print(recurso)
 
     if response.status_code == 200:
-        # do something
-        pass
+        return render(request, "ui/getInventario.html", response.json())
     else:
-        # handle error
-        pass
+        return render(request, "ui/inventarioNoDisp.html", response.json())
 
-    return render(request, "ui/getInventario.html", response.json())
+    
