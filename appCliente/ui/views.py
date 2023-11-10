@@ -47,14 +47,19 @@ def getDoctors(request):
     url = f"http://{kong_ip}/postDoctors"
     response = requests.get(url)
 
-    print("Profesionales:")
-
-    for profesional in response.json()["profesionales"]:
-        print(profesional)
 
     if response.status_code == 200:
+
+        print("Profesionales:")
+
+        for profesional in response.json()["profesionales"]:
+            print(profesional)
+            
         return render(request, "ui/getDoctors.html", response.json())
     else:
+
+        print("RESPUESTA FALLIDA")
+        
         return render(request, "ui/inventarioNoDisp.html", response.json())
 
 
@@ -64,7 +69,7 @@ def submitInventario(request):
 
     forumDict = {
         "nombre": request.POST.get("nombre"),
-        "cantidad": request.POST.get("cantidad"),
+        "cantidad": request.POST.get("cantidad"),b
         "tipo": request.POST.get("tipo"),
         "descripcion": request.POST.get("descripcion"),
         "proveedor": request.POST.get("proveedor"),
@@ -86,12 +91,16 @@ def getInventario(request):
     url = f"http://{kong_ip}/postInventarios"
     response = requests.get(url)
 
-    print("INVENTARIO:")
-
-    for recurso in response.json()["recursos"]:
-        print(recurso)
-
     if response.status_code == 200:
+
+        print("INVENTARIO:")
+
+        for recurso in response.json()["recursos"]:
+            print(recurso)
+        
         return render(request, "ui/getInventario.html", response.json())
     else:
+
+        print("RESPUESTA FALLIDA")
+        
         return render(request, "ui/inventarioNoDisp.html", response.json())
