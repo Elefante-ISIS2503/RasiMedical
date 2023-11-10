@@ -91,5 +91,5 @@ upstreams:
     # FRONT RASI APP
   - name: app_upstream
     targets:
-      - target:
+      - target: 10.128.0.4:8080
         weight: 100
