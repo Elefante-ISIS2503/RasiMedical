@@ -69,7 +69,7 @@ def submitInventario(request):
 
     forumDict = {
         "nombre": request.POST.get("nombre"),
-        "cantidad": request.POST.get("cantidad"),b
+        "cantidad": request.POST.get("cantidad"),
         "tipo": request.POST.get("tipo"),
         "descripcion": request.POST.get("descripcion"),
         "proveedor": request.POST.get("proveedor"),
