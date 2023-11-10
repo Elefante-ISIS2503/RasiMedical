@@ -60,7 +60,7 @@ def getDoctors(request):
 
         print("RESPUESTA FALLIDA")
         
-        return render(request, "ui/inventarioNoDisp.html", response.json())
+        return render(request, "ui/doctorNoDisp.html", response.json())
 
 
 
