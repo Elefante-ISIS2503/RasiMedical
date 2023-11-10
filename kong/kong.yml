@@ -2,6 +2,7 @@ _format_version: "2.1"
 
 services:
 
+  # INVENTARIO
   - host: inventario_upstream
     name: inventario_service
     protocol: http
@@ -9,10 +10,11 @@ services:
       
       - name: inventario
         paths:
-          - /getDoctors 
-          - /submitDoctor
+          - /postInventarios
+          - /saveInventario
         strip_path: false
 
+  # USUARIOS
   - host: usuarios_upstream
     name: usuarios_service
     protocol: http
@@ -20,23 +22,41 @@ services:
       
       - name: usuarios
         paths:
-          - /getDoctors 
+          - /postDoctors 
+          - /saveDoctor
+        strip_path: false
+
+    # FRONT RASI APP
+  - host: app_upstream
+    name: app_service
+    protocol: http
+    routes:
+      
+      - name: app
+        paths:
+          - /
+          - /home
+          - /newDoctor
+          - /newInventario
           - /submitDoctor
+          - /submitInventario
+          - /getDoctors
+          - /getInventario
         strip_path: false
     
 upstreams:
 
+  # INVENTARIO
   - name: inventario_upstream
     targets:
-      - target: <ip-privada-inventario-app-a>:8080
+      - target: 10.128.0.8:8080
         weight: 100
-      - target: <ip-privada-inventario-app-b>:8080
+      - target: 10.128.0.9:8080
         weight: 100
-      - target: <ip-privada-inventario-app-c>:8080
-        weight: 100
+      # PONER AQUI CUALQUIER OTRA IP DE INSTANCIA QUE VAYAMOS A TENER
 
     healthchecks:
-     threshold: 0
+     threshold: 55 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
      active:
        http_path: /health-check/
        timeout: 10
@@ -47,17 +67,17 @@ upstreams:
          tcp_failures: 1
          interval: 10
 
+  # USUARIOS
   - name: usuarios_upstream
     targets:
-      - target: <ip-privada-usuarios-app-a>:8080
+      - target: 10.128.0.2:8080
         weight: 100
-      - target: <ip-privada-usuarios-app-b>:8080
+      - target: 10.128.0.3:8080
         weight: 100
-      - target: <ip-privada-usuarios-app-c>:8080
-        weight: 100
+      # PONER AQUI CUALQUIER OTRA IP DE INSTANCIA QUE VAYAMOS A TENER
 
     healthchecks:
-     threshold: 0
+     threshold: 55 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
      active:
        http_path: /health-check/
        timeout: 10
@@ -68,5 +88,8 @@ upstreams:
          tcp_failures: 1
          interval: 10
 
-
-
+    # FRONT RASI APP
+  - name: app_upstream
+    targets:
+      - target: 10.128.0.4:8080
+        weight: 100
