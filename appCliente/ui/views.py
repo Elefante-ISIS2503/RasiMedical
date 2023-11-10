@@ -1,6 +1,9 @@
 from django.shortcuts import render
 import requests
 
+# IP DEL BROKER:
+kong_ip = "10.128.0.22:8000"
+
 
 def home(request):
     return render(request, "ui/home.html")
@@ -15,7 +18,7 @@ def newInventario(request):
 
 
 def submitDoctor(request):
-    print("SUBMITTING DOCTOR...")
+    print("Guardando profesional...")
 
     forumDict = {
         "nombre": request.POST.get("nombre"),
@@ -30,9 +33,8 @@ def submitDoctor(request):
 
     print(forumDict)
 
-    # Make the HTTP POST request to a specific IP address
-    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
-    url = f"http://{ip_address}/submitDoctor"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
+    # Manda la petición POST a la IP del broker
+    url = f"http://{kong_ip}/saveDoctor"
     response = requests.post(url, data=forumDict)
 
     if response.status_code == 200:
@@ -42,12 +44,10 @@ def submitDoctor(request):
 
 
 def getDoctors(request):
-    # Make the HTTP GET request to a specific IP address
-    ip_address = "34.102.201.95:80"  # CAMBIAR ESTO A LA IP DEL BROKER
-    url = f"http://{ip_address}/getDoctors"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
+    url = f"http://{kong_ip}/postDoctors"
     response = requests.get(url)
 
-    print("PROFESIONALES:")
+    print("Profesionales:")
 
     for profesional in response.json()["profesionales"]:
         print(profesional)
@@ -63,7 +63,7 @@ def getDoctors(request):
 
 
 def submitInventario(request):
-    print("SUBMITTING INVENTARIO...")
+    print("Guardando recurso...")
 
     forumDict = {
         "nombre": request.POST.get("nombre"),
@@ -75,11 +75,7 @@ def submitInventario(request):
 
     print(forumDict)
 
-    # Make the HTTP POST request to a specific IP address
-    ip_address = "35.241.8.32:80"  # CAMBIAR ESTO A LA IP DEL BROKER
-    url = (
-        f"http://{ip_address}/submitInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
-    )
+    url = f"http://{kong_ip}/saveInventario"
     response = requests.post(url, data=forumDict)
 
     if response.status_code == 200:
@@ -90,9 +86,7 @@ def submitInventario(request):
 
 
 def getInventario(request):
-    # Make the HTTP GET request to a specific IP address
-    ip_address = "35.241.8.32:80"  # CAMBIAR ESTO A LA IP DEL BROKER
-    url = f"http://{ip_address}/getInventario"  # CAMBIAR ESTO AL URL ENDPOINT DESEADO
+    url = f"http://{kong_ip}/postInventarios"
     response = requests.get(url)
 
     print("INVENTARIO:")
@@ -104,5 +98,3 @@ def getInventario(request):
         return render(request, "ui/getInventario.html", response.json())
     else:
         return render(request, "ui/inventarioNoDisp.html", response.json())
-
-    

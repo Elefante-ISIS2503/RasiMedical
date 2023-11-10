@@ -5,9 +5,9 @@ from .models import Recurso
 
 
 @csrf_exempt
-def submitInventario(request):
+def saveInventario(request):
     if request.method == "POST":
-        print("Submit Inventario")
+        print("Guardando recurso")
 
         nombre = request.POST.get("nombre")
         cantidad = request.POST.get("cantidad")
@@ -32,7 +32,7 @@ def submitInventario(request):
         return JsonResponse({"message": "Método no permitido"})
 
 
-def getInventario(request):
+def postInventarios(request):
     recursos = Recurso.objects.order_by("id").reverse()[:5]
 
     print("Recursos: ")

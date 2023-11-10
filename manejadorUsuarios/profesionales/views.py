@@ -5,9 +5,9 @@ from .models import Profesional
 
 
 @csrf_exempt
-def submitDoctor(request):
+def saveDoctor(request):
     if request.method == "POST":
-        print("SUBMITTING DOCTOR...")
+        print("Guardando profesional")
 
         nombre = request.POST.get("nombre")
         username = request.POST.get("username")
@@ -38,10 +38,10 @@ def submitDoctor(request):
         return JsonResponse({"message": "Método no permitido"})
 
 
-def getDoctors(request):
+def postDoctors(request):
     profesionales = Profesional.objects.order_by("id").reverse()[:5]
 
-    print("PROFESIONALES:")
+    print("Profesionales: ")
 
     for profesional in profesionales:
         print(profesional)
@@ -49,5 +49,6 @@ def getDoctors(request):
     data = {"profesionales": list(profesionales.values())}
     return JsonResponse(data)
 
+
 def healthCheck(request):
-    return HttpResponse('ok')
+    return HttpResponse("ok")
