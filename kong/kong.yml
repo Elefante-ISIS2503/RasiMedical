@@ -1,0 +1,72 @@
+_format_version: "2.1"
+
+services:
+
+  - host: inventario_upstream
+    name: inventario_service
+    protocol: http
+    routes:
+      
+      - name: inventario
+        paths:
+          - /getDoctors 
+          - /submitDoctor
+        strip_path: false
+
+  - host: usuarios_upstream
+    name: usuarios_service
+    protocol: http
+    routes:
+      
+      - name: usuarios
+        paths:
+          - /getDoctors 
+          - /submitDoctor
+        strip_path: false
+    
+upstreams:
+
+  - name: inventario_upstream
+    targets:
+      - target: <ip-privada-inventario-app-a>:8080
+        weight: 100
+      - target: <ip-privada-inventario-app-b>:8080
+        weight: 100
+      - target: <ip-privada-inventario-app-c>:8080
+        weight: 100
+
+    healthchecks:
+     threshold: 0
+     active:
+       http_path: /health-check/
+       timeout: 10
+       healthy:
+         successes: 3
+         interval: 20
+       unhealthy:
+         tcp_failures: 1
+         interval: 10
+
+  - name: usuarios_upstream
+    targets:
+      - target: <ip-privada-usuarios-app-a>:8080
+        weight: 100
+      - target: <ip-privada-usuarios-app-b>:8080
+        weight: 100
+      - target: <ip-privada-usuarios-app-c>:8080
+        weight: 100
+
+    healthchecks:
+     threshold: 0
+     active:
+       http_path: /health-check/
+       timeout: 10
+       healthy:
+         successes: 3
+         interval: 20
+       unhealthy:
+         tcp_failures: 1
+         interval: 10
+
+
+
