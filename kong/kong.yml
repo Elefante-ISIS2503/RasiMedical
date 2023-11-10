@@ -56,16 +56,16 @@ upstreams:
       # PONER AQUI CUALQUIER OTRA IP DE INSTANCIA QUE VAYAMOS A TENER
 
     healthchecks:
-     threshold: 55 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
+     threshold: 50 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
      active:
        http_path: /health-check/
-       timeout: 10
+       timeout: 5
        healthy:
-         successes: 3
-         interval: 20
+         successes: 2
+         interval: 5
        unhealthy:
-         tcp_failures: 1
-         interval: 10
+         tcp_failures: 2
+         interval: 5
 
   # USUARIOS
   - name: usuarios_upstream
@@ -77,16 +77,16 @@ upstreams:
       # PONER AQUI CUALQUIER OTRA IP DE INSTANCIA QUE VAYAMOS A TENER
 
     healthchecks:
-     threshold: 55 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
+     threshold: 35 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
      active:
        http_path: /health-check/
-       timeout: 10
+       timeout: 5
        healthy:
-         successes: 3
-         interval: 20
+         successes: 2
+         interval: 5
        unhealthy:
-         tcp_failures: 1
-         interval: 10
+         tcp_failures: 2 
+         interval: 5
 
     # FRONT RASI APP
   - name: app_upstream
