@@ -1,5 +1,14 @@
 from django.shortcuts import render
 import requests
+import smtplib
+import ssl
+from email.message import EmailMessage
+
+# Define email sender and receiver
+email_sender = 'juanescoro2010@gmail.com'
+email_password = 'ttqk iuom assp admu'
+email_receiver = 'j.coronel@uniandes.edu.co'
+
 
 # IP DEL BROKER:
 kong_ip = "10.128.0.22:8000"
@@ -59,6 +68,26 @@ def getDoctors(request):
     else:
 
         print("RESPUESTA FALLIDA")
+
+        # Enviar correo de advertencia
+        subject = 'SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (USUARIOS)!'
+        body = """
+        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE USUARIOS.
+        """
+        
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+        
+        # Add SSL (layer of security)
+        context = ssl.create_default_context()
+        
+        # Log in and send the email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
         
         return render(request, "ui/doctorNoDisp.html", response.json())
 
@@ -102,5 +131,25 @@ def getInventario(request):
     else:
 
         print("RESPUESTA FALLIDA")
+
+        # Enviar correo de advertencia
+        subject = 'SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (INVENTARIO)!'
+        body = """
+        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE INVENTARIO.
+        """
+        
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+        
+        # Add SSL (layer of security)
+        context = ssl.create_default_context()
+        
+        # Log in and send the email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
         
         return render(request, "ui/inventarioNoDisp.html", response.json())
