@@ -4,6 +4,7 @@ import smtplib
 import ssl
 from email.message import EmailMessage
 
+
 # Define email sender and receiver
 email_sender = "juanescoro2010@gmail.com"
 email_password = "ttqk iuom assp admu"

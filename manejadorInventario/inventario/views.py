@@ -44,6 +44,7 @@ def postInventarios(request):
     return JsonResponse(data)
 
 
+@csrf_exempt
 def searchInventario(request):
     if request.method == "POST":
         print("Buscando recurso")
