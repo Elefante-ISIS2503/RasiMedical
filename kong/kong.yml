@@ -43,6 +43,7 @@ services:
           - /submitInventario
           - /getDoctors
           - /getInventario
+          - /getInventarioSearch
         strip_path: false
     
 upstreams:
