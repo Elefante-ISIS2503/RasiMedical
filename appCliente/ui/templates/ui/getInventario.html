@@ -212,19 +212,19 @@
         </header>
 
         <!-- Adds a small vertical gap-->
-        <div style="height: 5px;"></div>
+        <div style="height: 10px;"></div>
 
 
         <!-- Move the form here -->
         <!-- Move the form here -->
-        <form class="ml-md-auto" method="post" action="InventarioSearchFront">
+        <form class="ml-md-auto d-flex" method="post" action="InventarioSearchFront">
             {% csrf_token %}
 
             <label class="sr-only" for="nombre">Buscar por nombre:</label>
             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Buscar recursos"
                 name="Buscar recursos">
             <div class="invalid-feedback">
-                Please enter a valid
+                Please enter a valid nombre
             </div>
 
 
