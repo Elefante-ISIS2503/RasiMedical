@@ -170,6 +170,22 @@
         tbody tr:nth-child(odd) {
             background-color: #f8f9fa;
         }
+
+
+        /* Adjust the form alignment */
+        .form-inline {
+            margin-top: 10px;
+        }
+
+        /* Style the search input and button */
+        .form-control {
+            width: 300px;
+            /* Adjust the width as needed */
+        }
+
+        .btn-secondary {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -195,45 +211,69 @@
             </div>
         </header>
 
-        <main role="main" class="inner cover">
-            <h1 class="cover-heading">Listado de recursos registrados</h1>
+        <!-- Adds a small vertical gap-->
+        <div style="height: 5px;"></div>
 
 
-            <div class="table-container">
-                <table class="table">
+        <!-- Move the form here -->
+        <form class="form-inline ml-md-auto" method="GET" action="searchInventario" method="post">
+            {% csrf_token %}
 
-                    <thead>
-                        <tr>
-                            <th colspan="6">
-                                <center>
-                                    <b>Ultimos 5 recursos añadidos al sistema</b>
-                                </center>
-                                </tk>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Cantidad</th>
-                            <th>Tipo</th>
-                            <th>Descripción</th>
-                            <th>Proveedor</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for recurso in recursos %}
-                        <tr>
-                            <td>{{ recurso.id }}</td>
-                            <td>{{ recurso.nombre }}</td>
-                            <td>{{ recurso.cantidad }}</td>
-                            <td>{{ recurso.tipo }}</td>
-                            <td>{{ recurso.descripcion }}</td>
-                            <td>{{ recurso.proveedor }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <label class="sr-only" for="nombre">Buscar por nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="search" placeholder="Buscar recursos"
+                name="Buscar recursos">
+            <div class="invalid-feedback">
+                Please enter a valid nombre address for shipping updates.
             </div>
+
+
+
+            <button type="submit" class="btn btn-secondary">Buscar</button>
+        </form>
+
+        <!-- Adds a small vertical gap-->
+        <div style="height: 15px;"></div>
+
+
+
+        <h1 class="cover-heading">Listado de recursos registrados</h1>
+
+
+        <div class="table-container">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th colspan="6">
+                            <center>
+                                <b>Ultimos 5 recursos añadidos al sistema</b>
+                            </center>
+                            </tk>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Proveedor</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recurso in recursos %}
+                    <tr>
+                        <td>{{ recurso.id }}</td>
+                        <td>{{ recurso.nombre }}</td>
+                        <td>{{ recurso.cantidad }}</td>
+                        <td>{{ recurso.tipo }}</td>
+                        <td>{{ recurso.descripcion }}</td>
+                        <td>{{ recurso.proveedor }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
 
         </main>
