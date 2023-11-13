@@ -112,23 +112,25 @@ def submitInventario(request):
         return render(request, "ui/submitInventarioFail.html", forumDict)
 
 
-def getInventarioSearch(request):
+def InventarioSearchFront(request):
     print("Buscando recurso...")
 
     forumDict = {
-        "nombre": request.GET.get("nombre"),
+        "nombre": request.POST.get("nombre"),
     }
 
     print(forumDict)
 
     url = f"http://{kong_ip}/searchInventario"
-    response = requests.get(url, data=forumDict)
+
+    response = requests.post(url, data=forumDict)
 
     if response.status_code == 200:
-        return render(request, "ui/searchInventario.html", response.json())
-
+        print("RECURSO ENCONTRADO:")
+        print(response.json())
+        return render(request, "ui/InventarioSearchFront.html", response.json())
     else:
-        return render(request, "ui/searchInventarioFail.html", forumDict)
+        return render(request, "ui/InventarioSearchFrontFail.html", forumDict)
 
 
 def getInventario(request):
