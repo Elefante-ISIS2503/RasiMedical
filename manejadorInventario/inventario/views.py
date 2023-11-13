@@ -52,7 +52,9 @@ def searchInventario(request):
         nombre = request.POST.get("nombre")
 
         # busca los recursos que contengan el nombre
-        recursos = Recurso.objects.filter(nombre__contains=nombre)
+        recursos = (
+            Recurso.objects.filter(nombre__contains=nombre).order_by("id").reverse()[:5]
+        )
 
         print("Recursos: ")
 
