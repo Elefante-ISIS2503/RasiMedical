@@ -112,7 +112,7 @@ def submitInventario(request):
         return render(request, "ui/submitInventarioFail.html", forumDict)
 
 
-def searchInventario(request):
+def getInventarioSearch(request):
     print("Buscando recurso...")
 
     forumDict = {
