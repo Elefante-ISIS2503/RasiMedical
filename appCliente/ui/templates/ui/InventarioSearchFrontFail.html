@@ -216,7 +216,6 @@
 
 
         <!-- Move the form here -->
-        <!-- Move the form here -->
         <form class="ml-md-auto" method="post" action="InventarioSearchFront">
             {% csrf_token %}
 
@@ -224,7 +223,7 @@
             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Buscar recursos"
                 name="Buscar recursos">
             <div class="invalid-feedback">
-                Please enter a valid
+                Please enter a valid nombre
             </div>
 
 
@@ -247,7 +246,7 @@
                     <tr>
                         <th colspan="6">
                             <center>
-                                <b>Ultimos 5 recursos añadidos al sistema</b>
+                                <b>Recursos encontrados: {{ recursos|length }}</b>
                             </center>
                             </tk>
                     </tr>
