@@ -44,5 +44,26 @@ def postInventarios(request):
     return JsonResponse(data)
 
 
+def searchInventario(request):
+    if request.method == "POST":
+        print("Buscando recurso")
+
+        nombre = request.POST.get("nombre")
+
+        # busca los recursos que contengan el nombre
+        recursos = Recurso.objects.filter(nombre__contains=nombre)
+
+        print("Recursos: ")
+
+        for recurso in recursos:
+            print(recurso)
+
+        data = {"recursos": list(recursos.values())}
+        return JsonResponse(data)
+
+    else:
+        return JsonResponse({"message": "Método no permitido"})
+
+
 def healthCheck(request):
     return HttpResponse("ok")

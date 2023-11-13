@@ -12,6 +12,7 @@ services:
         paths:
           - /postInventarios
           - /saveInventario
+          - /searchInventario
         strip_path: false
 
   # USUARIOS
