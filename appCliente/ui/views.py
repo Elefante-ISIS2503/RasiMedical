@@ -116,13 +116,13 @@ def getInventarioSearch(request):
     print("Buscando recurso...")
 
     forumDict = {
-        "nombre": request.POST.get("nombre"),
+        "nombre": request.GET.get("nombre"),
     }
 
     print(forumDict)
 
     url = f"http://{kong_ip}/searchInventario"
-    response = requests.post(url, data=forumDict)
+    response = requests.get(url, data=forumDict)
 
     if response.status_code == 200:
         return render(request, "ui/searchInventario.html", response.json())
