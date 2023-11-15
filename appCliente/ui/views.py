@@ -3,6 +3,7 @@ import requests
 import smtplib
 import ssl
 from email.message import EmailMessage
+from django.http import HttpResponseBadRequest
 
 
 # Define email sender and receiver
@@ -30,22 +31,34 @@ def newInventario(request):
 def submitDoctor(request):
     print("Guardando profesional...")
 
+    nombre = request.POST.get("nombre")
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    cedula = request.POST.get("cedula")
+    correo = request.POST.get("correo")
+    fecha_nacimiento = request.POST.get("fechaNacimiento")
+    rol = request.POST.get("rol")
+    especialidad = request.POST.get("especialidad")
+
+    # Basic input validation
+    if not all([nombre, username, password, cedula, correo, fecha_nacimiento, rol, especialidad]):
+        return HttpResponseBadRequest("Invalid input: All fields are required")
+
     forumDict = {
-        "nombre": request.POST.get("nombre"),
-        "username": request.POST.get("username"),
-        "password": request.POST.get("password"),
-        "cedula": request.POST.get("cedula"),
-        "correo": request.POST.get("correo"),
-        "fechaNacimiento": request.POST.get("fechaNacimiento"),
-        "rol": request.POST.get("rol"),
-        "especialidad": request.POST.get("especialidad"),
+        "nombre": nombre,
+        "username": username,
+        "password": password,
+        "cedula": cedula,
+        "correo": correo,
+        "fechaNacimiento": fecha_nacimiento,
+        "rol": rol,
+        "especialidad": especialidad,
     }
 
     print(forumDict)
 
-    # Manda la petición POST a la IP del broker
     url = f"http://{kong_ip}/saveDoctor"
-    response = requests.post(url, data=forumDict)
+    response = requests.post(url, json=forumDict)
 
     if response.status_code == 200:
         return render(request, "ui/submitDoctor.html", forumDict)
@@ -93,22 +106,32 @@ def getDoctors(request):
 def submitInventario(request):
     print("Guardando recurso...")
 
+    # Get data from the form
+    nombre = request.POST.get("nombre")
+    cantidad = request.POST.get("cantidad")
+    tipo = request.POST.get("tipo")
+    descripcion = request.POST.get("descripcion")
+    proveedor = request.POST.get("proveedor")
+
+    if not all([nombre, cantidad, tipo, descripcion, proveedor]):
+        return HttpResponseBadRequest("Invalid input: All fields are required")
+
     forumDict = {
-        "nombre": request.POST.get("nombre"),
-        "cantidad": request.POST.get("cantidad"),
-        "tipo": request.POST.get("tipo"),
-        "descripcion": request.POST.get("descripcion"),
-        "proveedor": request.POST.get("proveedor"),
+        "nombre": nombre,
+        "cantidad": cantidad,
+        "tipo": tipo,
+        "descripcion": descripcion,
+        "proveedor": proveedor,
     }
 
     print(forumDict)
 
     url = f"http://{kong_ip}/saveInventario"
-    response = requests.post(url, data=forumDict)
+
+    response = requests.post(url, json=forumDict)
 
     if response.status_code == 200:
         return render(request, "ui/submitInventario.html", forumDict)
-
     else:
         return render(request, "ui/submitInventarioFail.html", forumDict)
 
@@ -116,22 +139,24 @@ def submitInventario(request):
 def InventarioSearchFront(request):
     print("Buscando recurso...")
 
-    forumDict = {
-        "nombre": request.POST.get("nombre"),
-    }
+    nombre = request.POST.get("nombre")
+
+    if not nombre:
+        return HttpResponseBadRequest("Invalid input: nombre is required")
+
+    forumDict = {"nombre": nombre}
 
     print(forumDict)
 
     url = f"http://{kong_ip}/searchInventario"
 
-    response = requests.post(url, data=forumDict)
+    response = requests.post(url, json=forumDict)
 
     if response.status_code == 200:
-        print("RECURSO ENCONTRADO:")
-        print(response.json())
         return render(request, "ui/InventarioSearchFront.html", response.json())
     else:
         return render(request, "ui/InventarioSearchFrontFail.html", forumDict)
+
 
 
 def getInventario(request):
