@@ -27,19 +27,6 @@ services:
           - /saveDoctor
         strip_path: false
 
-    # AUTH0
-  - host: cd 
-    name: auth_service
-    protocol: http
-    routes:
-      
-      - name: auth
-        paths:
-          - /login/auth0
-          - /complete/auth0
-          - /
-        strip_path: false
-
     # FRONT RASI APP
   - host: app_upstream
     name: app_service
@@ -56,6 +43,19 @@ services:
           - /getDoctors
           - /getInventario
           - /getInventarioSearch
+        strip_path: false
+
+    # AUTH0
+  - host: auth_upstream
+    name: auth_service
+    protocol: http
+    routes:
+      
+      - name: auth
+        paths:
+          - /
+          - /login/auth0
+          - /complete/auth0
         strip_path: false
     
 upstreams:
