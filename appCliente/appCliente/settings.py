@@ -124,7 +124,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ipInstanciaPublica = "34.170.61.121"
+ipInstanciaPublica = "35.202.80.173"
 auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
 
 # AUTH0 STUFF
