@@ -138,5 +138,3 @@ SOCIAL_AUTH_AUTH0_SECRET = '2oj_por1UApZ-YkHsknNgdmmxfUUl2UhYnm3y-Enc9Cr--vQlEp0
 
 SOCIAL_AUTH_AUTH0_SCOPE = [ 'openid', 'profile','email','role', ]
 AUTHENTICATION_BACKENDS = { 'appCliente.auth0backend.Auth0', 'django.contrib.auth.backends.ModelBackend'}
-
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
