@@ -48,7 +48,7 @@ services:
     # AUTH0
   - host: auth_upstream
     name: auth_service
-    protocol: http
+    protocol: https
     routes:
       
       - name: auth
