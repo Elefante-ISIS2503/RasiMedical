@@ -35,6 +35,7 @@ services:
       
       - name: app
         paths:
+          - /
           - /home
           - /newDoctor
           - /newInventario
