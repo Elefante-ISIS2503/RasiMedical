@@ -28,7 +28,7 @@ services:
         strip_path: false
 
     # AUTH0
-  - host: auth_upstream
+  - host: cd 
     name: auth_service
     protocol: http
     routes:
@@ -37,6 +37,7 @@ services:
         paths:
           - /login/auth0
           - /complete/auth0
+          - /authorize
         strip_path: false
 
     # FRONT RASI APP
