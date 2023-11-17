@@ -37,7 +37,7 @@ services:
         paths:
           - /login/auth0
           - /complete/auth0
-          - /authorize
+          - /
         strip_path: false
 
     # FRONT RASI APP
@@ -48,7 +48,6 @@ services:
       
       - name: app
         paths:
-          - /
           - /home
           - /newDoctor
           - /newInventario
