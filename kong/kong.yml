@@ -55,7 +55,7 @@ services:
         paths:
           - /
           - /login/auth0
-          - /complete/auth0
+          #- /complete/auth0
         strip_path: false
     
 upstreams:
