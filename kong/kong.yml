@@ -112,5 +112,5 @@ upstreams:
     # FRONT RASI APP
   - name: auth_upstream
     targets:
-      - target: 34.170.61.121:8080
+      - target: 35.202.80.173:8080
         weight: 100
