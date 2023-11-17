@@ -124,13 +124,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ipInstanciaPublica = "130.211.122.159"
+ipInstanciaPublica = "34.29.145.169"
 auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
 
 # AUTH0 STUFF
 LOGIN_URL = "/login/auth0" 
 LOGIN_REDIRECT_URL = "/" 
-LOGOUT_REDIRECT_URL = f"https://{auth0Domain}/v2/logout?returnTo=http%3A%2F%2F{ipInstanciaPublica}:8080"
+LOGOUT_REDIRECT_URL = f"https://{auth0Domain}/v2/logout?returnTo=http%3A%2F%2F{ipInstanciaPublica}:8000"
 SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes 
 SOCIAL_AUTH_AUTH0_DOMAIN = f"{auth0Domain}" 
 SOCIAL_AUTH_AUTH0_KEY = 'MGz0z6kFDjO7s3iIreg4J5HZpXhhiaBb' 
