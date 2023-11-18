@@ -124,10 +124,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ipInstanciaPublica = "35.202.80.173"
-auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
+
 
 # AUTH0 STUFF
+ipInstanciaPublica = "34.135.128.228"
+auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
+
 LOGIN_URL = "/login/auth0" 
 LOGIN_REDIRECT_URL = "/" 
 LOGOUT_REDIRECT_URL = f"https://{auth0Domain}/v2/logout?returnTo=http%3A%2F%2F{ipInstanciaPublica}:8080"
