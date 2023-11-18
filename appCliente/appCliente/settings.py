@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # AUTH0 STUFF
-ipInstanciaPublica = "34.135.128.228"
+ipInstanciaPublica = "35.202.58.94"
 auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
 
 LOGIN_URL = "/login/auth0" 
