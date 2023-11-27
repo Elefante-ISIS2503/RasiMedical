@@ -49,4 +49,5 @@ router.get('/', async (req, res) => {
 // Health check endpoint
 router.get('/health-check/', (req, res) => {
     res.status(200).json({ status: 'ok' });
+    console.log("Health check ok");
 });
