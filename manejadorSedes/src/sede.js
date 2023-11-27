@@ -10,7 +10,12 @@ const sedeSchema = new mongoose.Schema({
         required: true
     },
     address: String,
-    city: String
+    city: String,
+    // Una sede tiene una lista de id's de medicos
+    // Pero no existe una referencia a la coleccion de medicos
+    medics: [String],
+    phone: String
+
 });
 
 // compile the model
