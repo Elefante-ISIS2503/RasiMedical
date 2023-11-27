@@ -28,6 +28,44 @@ def newInventario(request):
     return render(request, "ui/newInventario.html")
 
 
+def newSede(request):
+    return render(request, "ui/newSede.html")
+
+
+def submitSede(request):
+    print("Guardando sede...")
+
+    nombre = request.POST.get("nombre")
+    direccion = request.POST.get("direccion")
+    telefono = request.POST.get("telefono")
+    ciudad = request.POST.get("ciudad")
+    medicos = request.POST.get("medicos")
+
+    if not all([nombre, direccion, telefono, ciudad, medicos]):
+        return HttpResponseBadRequest("Invalid input: All fields are required")
+
+    # take the string medicos which will be a string like "1,2,3,4,5" and convert it to a list of strings
+    medicos = medicos.split(",")
+
+    forumDict = {
+        "nombre": nombre,
+        "direccion": direccion,
+        "telefono": telefono,
+        "ciudad": ciudad,
+        "medicos": medicos,
+    }
+
+    print(forumDict)
+
+    url = f"http://{kong_ip}/sede/"
+    response = requests.post(url, json=forumDict)
+
+    if response.status_code == 200:
+        return render(request, "ui/submitSede.html", forumDict)
+    else:
+        return render(request, "ui/submitSedeFail.html", forumDict)
+
+
 def submitDoctor(request):
     print("Guardando profesional...")
 
@@ -41,7 +79,18 @@ def submitDoctor(request):
     especialidad = request.POST.get("especialidad")
 
     # Basic input validation
-    if not all([nombre, username, password, cedula, correo, fecha_nacimiento, rol, especialidad]):
+    if not all(
+        [
+            nombre,
+            username,
+            password,
+            cedula,
+            correo,
+            fecha_nacimiento,
+            rol,
+            especialidad,
+        ]
+    ):
         return HttpResponseBadRequest("Invalid input: All fields are required")
 
     forumDict = {
@@ -156,7 +205,6 @@ def InventarioSearchFront(request):
         return render(request, "ui/InventarioSearchFront.html", response.json())
     else:
         return render(request, "ui/InventarioSearchFrontFail.html", forumDict)
-
 
 
 def getInventario(request):

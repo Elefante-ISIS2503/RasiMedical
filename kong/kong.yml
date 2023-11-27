@@ -38,38 +38,26 @@ services:
           - /saveDoctor
         strip_path: false
 
-    # FRONT RASI APP
-  - host: app_upstream
-    name: app_service
-    protocol: http
-    routes:
+  #   # FRONT RASI APP
+  # - host: app_upstream
+  #   name: app_service
+  #   protocol: http
+  #   routes:
       
-      - name: app
-        paths:
-          - /
-          - /home
-          - /newDoctor
-          - /newInventario
-          - /submitDoctor
-          - /submitInventario
-          - /getDoctors
-          - /getInventario
-          - /getInventarioSearch
-        strip_path: false
+  #     - name: app
+  #       paths:
+  #         - /
+  #         - /home
+  #         - /newDoctor
+  #         - /newInventario
+  #         - /submitDoctor
+  #         - /submitInventario
+  #         - /getDoctors
+  #         - /getInventario
+  #         - /getInventarioSearch
+  #       strip_path: false
 
-    # AUTH0
-  - host: auth_upstream
-    name: auth_service
-    protocol: http
-    routes:
-      
-      - name: auth
-        paths:
-          - /
-          - /login/auth0
-          - /complete/auth0
-        strip_path: false
-    
+
 upstreams:
 
 # SEDES
@@ -133,14 +121,9 @@ upstreams:
          tcp_failures: 2 
          interval: 5
 
-    # FRONT RASI APP
-  - name: app_upstream
-    targets:
-      - target: 10.128.0.4:8080
-        weight: 100
-
-    # FRONT RASI APP
-  - name: auth_upstream
-    targets:
-      - target: 35.202.80.173:8080
-        weight: 100
+  #   # FRONT RASI APP
+  # - name: app_upstream
+  #   targets:
+  #     - target: 10.128.0.4:8080
+  #       weight: 100
+      
