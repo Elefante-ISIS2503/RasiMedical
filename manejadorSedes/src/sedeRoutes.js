@@ -44,3 +44,9 @@ router.get('/', async (req, res) => {
         console.log("Error al consultar sedes");
     }
 });
+
+
+// Health check endpoint
+router.get('/health-check/', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});

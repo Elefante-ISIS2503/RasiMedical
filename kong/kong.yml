@@ -2,6 +2,17 @@ _format_version: "2.1"
 
 services:
 
+  # SEDES
+  - host: sedes_upstream
+    name: sedes_service
+    protocol: http
+    routes:
+      
+      - name: sedes
+        paths:
+          - /sedes/
+        strip_path: false
+
   # INVENTARIO
   - host: inventario_upstream
     name: inventario_service
@@ -60,6 +71,25 @@ services:
         strip_path: false
     
 upstreams:
+
+# SEDES
+  - name: sedes_upstream
+    targets:
+      - target: 10.128.0.25:8080
+        weight: 100
+      # PONER AQUI CUALQUIER OTRA IP DE INSTANCIA QUE VAYAMOS A TENER
+
+    healthchecks:
+     threshold: 50 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
+     active:
+       http_path: sedes/health-check/
+       timeout: 5
+       healthy:
+         successes: 2
+         interval: 5
+       unhealthy:
+         tcp_failures: 2
+         interval: 5
 
   # INVENTARIO
   - name: inventario_upstream
