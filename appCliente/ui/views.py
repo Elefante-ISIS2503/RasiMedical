@@ -60,7 +60,7 @@ def submitSede(request):
     url = f"http://{kong_ip}/sedes/"
     response = requests.post(url, json=forumDict)
 
-    if response.status_code == 200:
+    if response.status_code == 201:
         return render(request, "ui/submitSede.html", forumDict)
     else:
         return render(request, "ui/submitSedeFail.html", forumDict)
