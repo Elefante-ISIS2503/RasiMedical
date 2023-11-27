@@ -12,7 +12,7 @@ const sedeSchema = new mongoose.Schema({
     address: String,
     city: String,
     // Una sede tiene una lista de id's de medicos
-    // Pero no existe una referencia a la coleccion de medicos
+    // pero no se almacenan los objetos medicos, solo los id's
     medics: [String],
     phone: String
 

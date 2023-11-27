@@ -16,7 +16,9 @@ router.post('/', async (req, res) => {
     const sede = new Sede({
         name: req.body.name,
         address: req.body.address,
-        city: req.body.city
+        city: req.body.city,
+        medics: req.body.medics,
+        phone: req.body.phone
     });
 
     // Save sede in the database
