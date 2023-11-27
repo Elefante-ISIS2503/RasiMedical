@@ -82,7 +82,7 @@ upstreams:
     healthchecks:
      threshold: 50 # PORCENTAJE MINIMO PARA QUE NO SE ROMPA EL CIRCUIT BREAKER
      active:
-       http_path: sedes/health-check/
+       http_path: /sedes/health-check/
        timeout: 5
        healthy:
          successes: 2
