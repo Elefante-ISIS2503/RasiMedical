@@ -57,7 +57,7 @@ def submitSede(request):
 
     print(forumDict)
 
-    url = f"http://{kong_ip}/sede/"
+    url = f"http://{kong_ip}/sedes/"
     response = requests.post(url, json=forumDict)
 
     if response.status_code == 200:
@@ -150,6 +150,43 @@ def getDoctors(request):
             smtp.sendmail(email_sender, email_receiver, em.as_string())
 
         return render(request, "ui/doctorNoDisp.html", response.json())
+
+
+def getSedes(request):
+    url = f"http://{kong_ip}/postSedes"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        print("Sedes:")
+
+        for sede in response.json()["sedes"]:
+            print(sede)
+
+        return render(request, "ui/getSedes.html", response.json())
+    else:
+        print("RESPUESTA FALLIDA")
+
+        # Enviar correo de advertencia
+        subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (SEDES)!"
+        body = """
+        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE SEDES.
+        """
+
+        em = EmailMessage()
+        em["From"] = email_sender
+        em["To"] = email_receiver
+        em["Subject"] = subject
+        em.set_content(body)
+
+        # Add SSL (layer of security)
+        context = ssl.create_default_context()
+
+        # Log in and send the email
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+        return render(request, "ui/sedeNoDisp.html", response.json())
 
 
 def submitInventario(request):

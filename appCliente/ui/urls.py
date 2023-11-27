@@ -15,6 +15,7 @@ urlpatterns = [
     ),
     path("submitSede", views.submitSede, name="submitSede"),
     path("getDoctors", views.getDoctors, name="getDoctors"),
+    path("getSedes", views.getSedes, name="getSedes"),
     path("submitInventario", views.submitInventario, name="submitInventario"),
     path("getInventario", views.getInventario, name="getInventario"),
 ]
