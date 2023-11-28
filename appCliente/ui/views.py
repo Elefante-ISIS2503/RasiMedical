@@ -48,11 +48,11 @@ def submitSede(request):
     medicos = medicos.split(",")
 
     forumDict = {
-        "nombre": nombre,
-        "direccion": direccion,
-        "telefono": telefono,
-        "ciudad": ciudad,
-        "medicos": medicos,
+        "name": nombre,
+        "address": direccion,
+        "city": telefono,
+        "medics": medicos,
+        "phone": ciudad,
     }
 
     print(forumDict)
