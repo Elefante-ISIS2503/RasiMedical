@@ -153,7 +153,8 @@ def getDoctors(request):
 
 
 def getSedes(request):
-    url = f"http://{kong_ip}/postSedes"
+    print("Buscando sedes...")
+    url = f"http://{kong_ip}/sedes/"
     response = requests.get(url)
 
     if response.status_code == 200:
