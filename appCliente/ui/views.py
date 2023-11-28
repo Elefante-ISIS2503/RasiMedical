@@ -157,6 +157,8 @@ def getSedes(request):
     url = f"http://{kong_ip}/sedes/"
     response = requests.get(url)
 
+    print(response.json())
+
     if response.status_code == 200:
         print("Sedes:")
 
