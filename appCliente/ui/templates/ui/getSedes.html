@@ -170,22 +170,6 @@
         tbody tr:nth-child(odd) {
             background-color: #f8f9fa;
         }
-
-
-        /* Adjust the form alignment */
-        .form-inline {
-            margin-top: 10px;
-        }
-
-        /* Style the search input and button */
-        .form-control {
-            width: 300px;
-            /* Adjust the width as needed */
-        }
-
-        .btn-secondary {
-            margin-left: 10px;
-        }
     </style>
 </head>
 
@@ -213,45 +197,42 @@
             </div>
         </header>
 
-        <!-- Adds a small vertical gap-->
-        <div style="height: 10px;"></div>
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Listado de sedes registradas</h1>
 
 
-        <h1 class="cover-heading">Listado de sedes registradas</h1>
+            <div class="table-container">
+                <table class="table">
 
-
-        <div class="table-container">
-            <table class="table">
-
-                <thead>
-                    <tr>
-                        <th colspan="6">
-                            <center>
-                                <b>Ultimos 5 sedes añadidas al sistema</b>
-                            </center>
-                            </tk>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Ciudad</th>
-                        <th>dirección</th>
-                        <th>Telefono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for sede in sedes %}
-                    <tr>
-                        <td>{{ sede.id }}</td>
-                        <td>{{ sede.name }}</td>
-                        <td>{{ sede.city }}</td>
-                        <td>{{ sede.address }}</td>
-                        <td>{{ sede.phone }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    <thead>
+                        <tr>
+                            <th colspan="8">
+                                <center>
+                                    <b>Ultimas 5 sedes añadidas al sistema</b>
+                                </center>
+                                </tk>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>dirección</th>
+                            <th>Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sede in sedes %}
+                        <tr>
+                            <td>{{ sede.id }}</td>
+                            <td>{{ sede.name }}</td>
+                            <td>{{ sede.city }}</td>
+                            <td>{{ sede.address }}</td>
+                            <td>{{ sede.phone }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
 
         </main>

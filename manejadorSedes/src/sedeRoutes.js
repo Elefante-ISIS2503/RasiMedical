@@ -37,6 +37,8 @@ router.get('/', async (req, res) => {
     console.log("Consultando sedes...");
     try {
         const sedes = await collection.find().toArray();
+        // only return the last 5 sedes
+        sedes = sedes.slice(Math.max(sedes.length - 5, 0));
         res.json(sedes);
         console.log("Sedes consultadas");
     } catch (err) {
