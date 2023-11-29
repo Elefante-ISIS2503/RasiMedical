@@ -165,12 +165,11 @@ def getSedes(request):
         response = response.json()
 
         for sede in response:
-            print(sede)
             # replace the name of the _id field with id
             sede["id"] = sede.pop("_id")
+            print(sede)
 
-        return render(request, "ui/getSedes.html", {"sedes": response.json()})
-    else:
+        return render(request, "ui/getSedes.html", {"sedes": response})
         print("RESPUESTA FALLIDA")
 
         # Enviar correo de advertencia
