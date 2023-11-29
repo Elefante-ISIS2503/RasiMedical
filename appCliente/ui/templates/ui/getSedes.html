@@ -234,19 +234,19 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>Correo</th>
+                        <th>Ciudad</th>
+                        <th>dirección</th>
+                        <th>Telefono</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for sede in sedes %}
                     <tr>
-                        <td>{{ sedes.id }}</td>
-                        <td>{{ sedes.nombre }}</td>
-                        <td>{{ sedes.telefono }}</td>
-                        <td>{{ sedes.direccion }}</td>
-                        <td>{{ sedes.correo }}</td>
+                        <td>{{ sedes._id }}</td>
+                        <td>{{ sedes.name }}</td>
+                        <td>{{ sedes.city }}</td>
+                        <td>{{ sedes.address }}</td>
+                        <td>{{ sedes.phone }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
