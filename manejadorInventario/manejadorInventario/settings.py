@@ -80,8 +80,8 @@ DATABASES = {
         "NAME": "rasi_db",
         "USER": "rasi_user",
         "PASSWORD": "rasi",
-        "HOST": "10.99.144.3",
-        "PORT": "",
+        "HOST": "10.128.0.23",
+        "PORT": "5432",
     }
 }
 
