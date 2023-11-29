@@ -157,15 +157,15 @@ def getSedes(request):
     url = f"http://{kong_ip}/sedes/"
     response = requests.get(url)
 
-    print(response.json())
+    # print(response.json())
 
     if response.status_code == 200:
         print("Sedes:")
 
-        for sede in response.json()["sedes"]:
+        for sede in response.json():
             print(sede)
 
-        return render(request, "ui/getSedes.html", response.json())
+        return render(request, "ui/getSedes.html", {"sedes": response.json()})
     else:
         print("RESPUESTA FALLIDA")
 

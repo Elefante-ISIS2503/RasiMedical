@@ -204,6 +204,8 @@
                     <!-- makes a clickable link -->
                     <a class="nav-link active" href="getInventario">Recursos</a>
                     <!-- makes a clickable link -->
+                    <a class="nav-link" href="getSedes">Sedes</a>
+                    <!-- makes a clickable link -->
                     <a class="nav-link" href="#">Login</a>
                     <!-- makes a clickable link -->
                     <a class="nav-link" href="#">Info</a>
@@ -213,28 +215,6 @@
 
         <!-- Adds a small vertical gap-->
         <div style="height: 10px;"></div>
-
-
-        <!-- Move the form here -->
-        <!-- Move the form here -->
-        <form class="ml-md-auto d-flex" method="post" action="InventarioSearchFront">
-            {% csrf_token %}
-
-            <label class="sr-only" for="nombre">Buscar por nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Buscar recursos"
-                name="Buscar recursos">
-            <div class="invalid-feedback">
-                Please enter a valid nombre
-            </div>
-
-
-
-            <button type="submit" class="btn btn-secondary">Buscar</button>
-        </form>
-
-        <!-- Adds a small vertical gap-->
-        <div style="height: 15px;"></div>
-
 
 
         <h1 class="cover-heading">Listado de sedes registradas</h1>
@@ -260,13 +240,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for recurso in recursos %}
+                    {% for sede in sedes %}
                     <tr>
-                        <td>{{ recurso.id }}</td>
-                        <td>{{ recurso.nombre }}</td>
-                        <td>{{ recurso.telefono }}</td>
-                        <td>{{ recurso.direccion }}</td>
-                        <td>{{ recurso.correo }}</td>
+                        <td>{{ sedes.id }}</td>
+                        <td>{{ sedes.nombre }}</td>
+                        <td>{{ sedes.telefono }}</td>
+                        <td>{{ sedes.direccion }}</td>
+                        <td>{{ sedes.correo }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
