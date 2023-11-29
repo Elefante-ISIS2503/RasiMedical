@@ -162,8 +162,12 @@ def getSedes(request):
     if response.status_code == 200:
         print("Sedes:")
 
-        for sede in response.json():
+        response = response.json()
+
+        for sede in response:
             print(sede)
+            # replace the name of the _id field with id
+            sede["id"] = sede.pop("_id")
 
         return render(request, "ui/getSedes.html", {"sedes": response.json()})
     else:
