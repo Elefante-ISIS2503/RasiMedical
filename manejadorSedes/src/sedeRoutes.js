@@ -37,8 +37,10 @@ router.get('/', async (req, res) => {
     console.log("Consultando sedes...");
     try {
         const sedes = await collection.find().toArray();
-        // only return the last 5 sedes
-        sedes = sedes.slice(Math.max(sedes.length - 5, 0));
+        // only get the last 5 elements of the array if its length is greater than 5
+        if (sedes.length > 5) {
+            sedes = sedes.slice(sedes.length - 5, sedes.length);
+        }
         res.json(sedes);
         console.log("Sedes consultadas");
     } catch (err) {
