@@ -19,7 +19,7 @@ urlpatterns = [
     path("submitInventario", views.submitInventario, name="submitInventario"),
     path("getInventario", views.getInventario, name="getInventario"),
     path(
-        "getDoctorsBySede/<str:sede_id>/",
+        "getDoctorsBySede/<str:sede_id>",
         views.getDoctorsBySede,
         name="getDoctorsBySede",
     ),
