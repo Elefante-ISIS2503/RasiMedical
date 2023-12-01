@@ -231,7 +231,7 @@
                             <th>dirección</th>
                             <th>Telefono</th>
                             <th>Id's doctores asignados</th>
-                            <th>Acción</th>
+                            <th>Ver profesionales de la sede</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -244,8 +244,7 @@
                             <td>{{ sede.phone }}</td>
                             <td>{{ sede.medics }}</td>
                             <td>
-                                <button onclick="getDoctorsBySede('{{ sede.id }}')" class="btn btn-secondary">Ver
-                                    medicos</button>
+                                <a href="{% url 'getDoctorsBySede' sede.id %}" class="btn btn-secondary">Ver medicos</a>
                             </td>
                         </tr>
                         {% endfor %}
