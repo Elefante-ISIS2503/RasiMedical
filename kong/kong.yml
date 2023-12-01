@@ -11,6 +11,7 @@ services:
       - name: sedes
         paths:
           - /sedes/
+          - /sedes/{sede_id}/doctors
         strip_path: false
 
   # INVENTARIO
