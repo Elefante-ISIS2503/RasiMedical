@@ -120,7 +120,8 @@ function getDoctors() {
 router.get('/:id/doctors', async (req, res) => {
     console.log("Consultando doctores de la sede...");
     try {
-        const sede = await collection.findOne({ _id: ObjectId(req.params.id) });
+        let ident = new mongoose.Types.ObjectId(req.params.id);
+        const sede = await collection.findOne({ _id: ident });
         console.log("Se consultó la sede", sede.name, "con id", req.params.id);
         let doctors = await getDoctors();
         doctors = doctors["profesionales"]
