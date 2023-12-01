@@ -134,6 +134,7 @@ router.get('/:id/doctors', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
         console.log("Error al consultar doctores de la sede");
+        console.log(err);
     }
 });
 
