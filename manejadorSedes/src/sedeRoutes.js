@@ -86,7 +86,7 @@ function getDoctors() {
 }
 
 // get all doctors from a sede
-router.get('/:id/doctors', getSede, async (req, res) => {
+router.get('/:id/doctors', async (req, res) => {
     console.log("Consultando doctores de la sede...");
     try {
         const sede = await collection.findOne({ _id: req.params.id });
