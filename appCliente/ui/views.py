@@ -165,6 +165,8 @@ def getDoctorsBySede(request, sede_id):
         for doctor in response:
             print(doctor)
 
+        print({"profesionales": response, "sede_id": sede_id})
+
         return render(
             request,
             "ui/getDoctorsBySede.html",
