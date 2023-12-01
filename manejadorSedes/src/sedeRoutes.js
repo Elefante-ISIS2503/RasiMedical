@@ -133,7 +133,7 @@ router.get('/:id/doctors', async (req, res) => {
         console.log("Doctores de la sede consultados");
     } catch (err) {
         res.status(500).json({ message: err.message });
-        console.log("Error al consultar doctores de la sede");
+        console.log("Error al consultar doctores de la sede con id", req.params.id);
         console.log(err);
     }
 });
