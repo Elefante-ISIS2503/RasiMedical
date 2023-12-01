@@ -126,15 +126,17 @@ router.get('/:id/doctors', async (req, res) => {
         let doctors = await getDoctors();
         doctors = doctors["profesionales"]
         let sedeDoctors = [];
+        console.log("Doctores de la sede:");
         for (let i = 0; i < sede.medics.length; i++) {
             for (let j = 0; j < doctors.length; j++) {
                 if (sede.medics[i].toString() === doctors[j].id.toString()) {
                     sedeDoctors.push(doctors[j]);
+                    console.log(doctors[j]);
                 }
             }
         }
+        console.log("Se encontraron", sedeDoctors.length, "doctores");
         res.json(sedeDoctors);
-        console.log("Doctores de la sede consultados");
     } catch (err) {
         res.status(500).json({ message: err.message });
         console.log("Error al consultar doctores de la sede con id", req.params.id);

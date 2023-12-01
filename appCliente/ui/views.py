@@ -168,7 +168,7 @@ def getDoctorsBySede(request, sede_id):
         return render(
             request,
             "ui/getDoctorsBySede.html",
-            {"doctores": response, "sede_id": sede_id},
+            {"profesionales": response, "sede_id": sede_id},
         )
     else:
         print("RESPUESTA FALLIDA")
