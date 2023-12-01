@@ -34,7 +34,8 @@ services:
       
       - name: usuarios
         paths:
-          - /postDoctors 
+          - /postDoctors
+          - /postAllDoctors
           - /saveDoctor
         strip_path: false
 

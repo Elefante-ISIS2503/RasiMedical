@@ -50,5 +50,14 @@ def postDoctors(request):
     return JsonResponse(data)
 
 
+def postAllDoctors(request):
+    profesionales = Profesional.objects.order_by("id").reverse()
+
+    print("Se obtuvieron", len(profesionales), "profesionales")
+
+    data = {"profesionales": list(profesionales.values())}
+    return JsonResponse(data)
+
+
 def healthCheck(request):
     return HttpResponse("ok")

@@ -7,6 +7,11 @@ const router = express.Router();
 const collection = require('./index');
 module.exports = router;
 
+
+// IP DEL BROKER:
+let kong_ip = "10.128.0.22:8000"
+
+
 // Create a sede
 router.post('/', async (req, res) => {
     console.log("Registrando sede...");
@@ -20,6 +25,19 @@ router.post('/', async (req, res) => {
         medics: req.body.medics,
         phone: req.body.phone
     });
+
+    // check the existence of the doctors in the doctors service
+    let doctors = await getDoctors();
+    let doctorsExist = true;
+    for (let i = 0; i < sede.medics.length; i++) {
+        if (!doctors.includes(sede.medics[i])) {
+            doctorsExist = false;
+            console.log("El doctor " + sede.medics[i] + " no existe");
+            console.log("Registrando sede fallido");
+            res.status(400).json({ message: "El doctor " + sede.medics[i] + " no existe" });
+            break;
+        }
+    }
 
     // Save sede in the database
     try {
@@ -46,6 +64,45 @@ router.get('/', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
         console.log("Error al consultar sedes");
+    }
+});
+
+// Get all doctors from the doctors service
+// this is a support function to get the doctors from the doctors service
+// and to check the existence of the doctors in the doctors service
+function getDoctors() {
+    return new Promise((resolve, reject) => {
+        console.log("Consultando doctores...");
+        request.get('http://' + kong_ip + '/getAllDoctors', (err, res, body) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(JSON.parse(body));
+            console.log("Doctores consultados");
+        }
+        );
+    }
+    );
+}
+
+// get all doctors from a sede
+router.get('/:id/doctors', getSede, async (req, res) => {
+    console.log("Consultando doctores de la sede...");
+    try {
+        const sede = await collection.findOne({ _id: req.params.id });
+        let doctors = await getDoctors();
+        let sedeDoctors = [];
+        // check if the doctor id is in the sede doctors array
+        for (let i = 0; i < doctors.length; i++) {
+            if (sede.medics.includes(doctors[i].id)) {
+                sedeDoctors.push(doctors[i]);
+            }
+        }
+        res.json(sedeDoctors);
+        console.log("Doctores de la sede consultados");
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+        console.log("Error al consultar doctores de la sede");
     }
 });
 
