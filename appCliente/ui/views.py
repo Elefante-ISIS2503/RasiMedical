@@ -167,6 +167,8 @@ def getSedes(request):
         for sede in response:
             # replace the name of the _id field with id
             sede["id"] = sede.pop("_id")
+            # replace the medics field with a comma separated string of the medic ids
+            sede["medics"] = ",".join(sede["medics"])
             print(sede)
 
         return render(request, "ui/getSedes.html", {"sedes": response})
