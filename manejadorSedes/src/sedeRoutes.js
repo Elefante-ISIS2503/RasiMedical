@@ -6,7 +6,8 @@ const express = require('express');
 const router = express.Router();
 const collection = require('./index');
 const request = require('request');
-const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = router;
 
