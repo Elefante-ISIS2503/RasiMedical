@@ -75,7 +75,7 @@ router.get('/', async (req, res) => {
 function getDoctors() {
     return new Promise((resolve, reject) => {
         console.log("Consultando doctores...");
-        request.get('http://' + kong_ip + '/getAllDoctors', (err, res, body) => {
+        request.get('http://' + kong_ip + '/postAllDoctors', (err, res, body) => {
             if (err) {
                 reject(err);
             }
