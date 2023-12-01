@@ -29,11 +29,11 @@ router.post('/', async (req, res) => {
 
     // check the existence of the doctors in the doctors service
     let doctors = await getDoctors();
-    console.log("doctors", doctors);
-    let doctorsExist = true;
+    // turns the doctors json into an array
+    doctors = doctors["profesionales"]
+
     for (let i = 0; i < sede.medics.length; i++) {
         if (!doctors.includes(sede.medics[i])) {
-            doctorsExist = false;
             console.log("El doctor " + sede.medics[i] + " no existe");
             console.log("Registrando sede fallido");
             res.status(400).json({ message: "El doctor " + sede.medics[i] + " no existe" });
@@ -80,15 +80,10 @@ function getDoctors() {
                 reject(err);
             }
             resolve(JSON.parse(body));
-            console.log("Se encontraron", JSON.parse(body).length, "doctores");
-
-
+            console.log("Se encontraron", JSON.parse(body)["profesionales"].length, "doctores");
         }
-
         )
-
     })
-
 }
 
 
