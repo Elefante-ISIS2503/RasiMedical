@@ -2,22 +2,33 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from .models import Profesional
+import json
 
 
 @csrf_exempt
 def saveDoctor(request):
     if request.method == "POST":
         print("Guardando profesional")
-        print(request.POST)
+        print(json.loads(request.body))
 
-        nombre = request.POST.get("nombre")
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        cedula = request.POST.get("cedula")
-        correo = request.POST.get("correo")
-        fecha_nacimiento = request.POST.get("fechaNacimiento")
-        rol = request.POST.get("rol")
-        especialidad = request.POST.get("especialidad")
+        # nombre = request.POST.get("nombre")
+        # username = request.POST.get("username")
+        # password = request.POST.get("password")
+        # cedula = request.POST.get("cedula")
+        # correo = request.POST.get("correo")
+        # fecha_nacimiento = request.POST.get("fechaNacimiento")
+        # rol = request.POST.get("rol")
+        # especialidad = request.POST.get("especialidad")
+
+        data = json.loads(request.body)
+        nombre = data.get("nombre")
+        username = data.get("username")
+        password = data.get("password")
+        cedula = data.get("cedula")
+        correo = data.get("correo")
+        fecha_nacimiento = data.get("fechaNacimiento")
+        rol = data.get("rol")
+        especialidad = data.get("especialidad")
 
         profesional = Profesional(
             nombre=nombre,
