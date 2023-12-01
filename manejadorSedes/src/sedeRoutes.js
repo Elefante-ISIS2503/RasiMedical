@@ -31,24 +31,50 @@ router.post('/', async (req, res) => {
     let doctors = await getDoctors();
     // turns the doctors json into an array
     doctors = doctors["profesionales"]
+    let doctorsExist = true;
 
+    // imprime los id's de los doctores encontrados
+    for (let i = 0; i < doctors.length; i++) {
+        console.log(doctors[i].id.toString());
+    }
+
+    // for every doctor in the sede, iterate over the doctors array
+    // and check if the doctor id is in the doctors array
+    // must turn the doctor id into a string to compare it with the doctors array
     for (let i = 0; i < sede.medics.length; i++) {
-        if (!doctors.includes(sede.medics[i])) {
-            console.log("El doctor " + sede.medics[i] + " no existe");
-            console.log("Registrando sede fallido");
-            res.status(400).json({ message: "El doctor " + sede.medics[i] + " no existe" });
-            break;
+        let doctorExists = false;
+        for (let j = 0; j < doctors.length; j++) {
+            if (sede.medics[i].toString() === doctors[j].id.toString()) {
+                doctorExists = true;
+            }
+        }
+        if (!doctorExists) {
+            doctorsExist = false;
+            res.status(400).json({ message: "Doctor " + sede.medics[i] + " no existe" });
+            console.log("Error al registrar sede");
+            console.log("Doctor " + sede.medics[i] + " no existe");
         }
     }
 
     // Save sede in the database
-    try {
-        const newSede = await collection.insertOne(sede);
-        res.status(201).json(newSede);
-        console.log("Sede registrada");
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-        console.log("Error al registrar sede");
+    // try {
+    //     const newSede = await collection.insertOne(sede);
+    //     res.status(201).json(newSede);
+    //     console.log("Sede registrada");
+    // } catch (err) {
+    //     res.status(400).json({ message: err.message });
+    //     console.log("Error al registrar sede");
+    // }
+
+    if (doctorsExist) {
+        try {
+            const newSede = await collection.insertOne(sede);
+            res.status(201).json(newSede);
+            console.log("Sede registrada");
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+            console.log("Error al registrar sede");
+        }
     }
 });
 
