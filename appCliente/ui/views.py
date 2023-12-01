@@ -50,9 +50,9 @@ def submitSede(request):
     forumDict = {
         "name": nombre,
         "address": direccion,
-        "city": telefono,
+        "phone": telefono,
+        "city": ciudad,
         "medics": medicos,
-        "phone": ciudad,
     }
 
     print(forumDict)

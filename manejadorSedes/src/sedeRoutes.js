@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
 
     // check the existence of the doctors in the doctors service
     let doctors = await getDoctors();
+    console.log("doctors", doctors);
     let doctorsExist = true;
     for (let i = 0; i < sede.medics.length; i++) {
         if (!doctors.includes(sede.medics[i])) {
@@ -79,12 +80,17 @@ function getDoctors() {
                 reject(err);
             }
             resolve(JSON.parse(body));
-            console.log("Doctores consultados");
+            console.log("Se encontraron", JSON.parse(body).length, "doctores");
+
+
         }
-        );
-    }
-    );
+
+        )
+
+    })
+
 }
+
 
 // get all doctors from a sede
 router.get('/:id/doctors', async (req, res) => {
