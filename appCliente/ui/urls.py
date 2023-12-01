@@ -18,4 +18,5 @@ urlpatterns = [
     path("getSedes", views.getSedes, name="getSedes"),
     path("submitInventario", views.submitInventario, name="submitInventario"),
     path("getInventario", views.getInventario, name="getInventario"),
+    path("getDoctorsBySede", views.getDoctorsBySede, name="getDoctorsBySede"),
 ]

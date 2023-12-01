@@ -119,11 +119,13 @@ router.get('/:id/doctors', async (req, res) => {
     try {
         const sede = await collection.findOne({ _id: req.params.id });
         let doctors = await getDoctors();
+        doctors = doctors["profesionales"]
         let sedeDoctors = [];
-        // check if the doctor id is in the sede doctors array
-        for (let i = 0; i < doctors.length; i++) {
-            if (sede.medics.includes(doctors[i].id)) {
-                sedeDoctors.push(doctors[i]);
+        for (let i = 0; i < sede.medics.length; i++) {
+            for (let j = 0; j < doctors.length; j++) {
+                if (sede.medics[i].toString() === doctors[j].id.toString()) {
+                    sedeDoctors.push(doctors[j]);
+                }
             }
         }
         res.json(sedeDoctors);

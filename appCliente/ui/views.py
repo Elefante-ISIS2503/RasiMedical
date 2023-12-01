@@ -152,6 +152,50 @@ def getDoctors(request):
         return render(request, "ui/doctorNoDisp.html", response.json())
 
 
+def getDoctorsBySede(request, sede_id):
+    print("Buscando doctores por sede...")
+    url = f"http://{kong_ip}/sedes/{sede_id}/doctors"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        print("Doctores:")
+
+        response = response.json()
+
+        for doctor in response:
+            print(doctor)
+
+        return render(
+            request,
+            "ui/getDoctorsBySede.html",
+            {"doctores": response, "sede_id": sede_id},
+        )
+    else:
+        print("RESPUESTA FALLIDA")
+
+        # Enviar correo de advertencia
+        subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (DOCTORES)!"
+        body = """
+        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE DOCTORES.
+        """
+
+        em = EmailMessage()
+        em["From"] = email_sender
+        em["To"] = email_receiver
+        em["Subject"] = subject
+        em.set_content(body)
+
+        # Add SSL (layer of security)
+        context = ssl.create_default_context()
+
+        # Log in and send the email
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+        return render(request, "ui/doctorNoDisp.html", response.json())
+
+
 def getSedes(request):
     print("Buscando sedes...")
     url = f"http://{kong_ip}/sedes/"
