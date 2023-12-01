@@ -78,8 +78,8 @@ WSGI_APPLICATION = "manejadorUsuarios.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "rasi_db",
-        "USER": "rasi_user",
+        "NAME": "usuarios_db",
+        "USER": "usuarios_user",
         "PASSWORD": "rasi",
         "HOST": "10.128.0.24",
         "PORT": "5432",

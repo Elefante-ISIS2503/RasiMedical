@@ -77,8 +77,8 @@ WSGI_APPLICATION = "manejadorInventario.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "rasi_db",
-        "USER": "rasi_user",
+        "NAME": "inventario_db",
+        "USER": "inventario_user",
         "PASSWORD": "rasi",
         "HOST": "10.128.0.23",
         "PORT": "5432",
