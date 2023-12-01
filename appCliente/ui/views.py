@@ -156,6 +156,7 @@ def getDoctorsBySede(request, sede_id):
     print("Buscando doctores por sede...")
     url = f"http://{kong_ip}/sedes/{sede_id}/doctors"
     response = requests.get(url)
+    
 
     if response.status_code == 200:
         print("Doctores:")

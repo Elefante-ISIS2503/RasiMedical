@@ -244,7 +244,7 @@
                             <td>{{ sede.phone }}</td>
                             <td>{{ sede.medics }}</td>
                             <td>
-                                <a href="{% url 'getDoctorsBySede' sede.id %}" class="btn btn-secondary">Ver medicos</a>
+                                <a href="getDoctorsBySede/{{ sede.id }}" class="btn btn-secondary">Ver profesionales</a>
                             </td>
                         </tr>
                         {% endfor %}
