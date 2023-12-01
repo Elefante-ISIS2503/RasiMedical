@@ -118,8 +118,11 @@ router.get('/:id/doctors', async (req, res) => {
     console.log("Consultando doctores de la sede...");
     try {
         const sede = await collection.findOne({ _id: req.params.id });
+        console.log("Sede consultada: ", sede);
         let doctors = await getDoctors();
+        console.log("Doctores de la sede consultados");
         doctors = doctors["profesionales"]
+        console.log("Doctores encontrados: ", doctors);
         let sedeDoctors = [];
         for (let i = 0; i < sede.medics.length; i++) {
             for (let j = 0; j < doctors.length; j++) {
