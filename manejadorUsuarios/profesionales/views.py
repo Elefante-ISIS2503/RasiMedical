@@ -8,6 +8,7 @@ from .models import Profesional
 def saveDoctor(request):
     if request.method == "POST":
         print("Guardando profesional")
+        print(request.POST)
 
         nombre = request.POST.get("nombre")
         username = request.POST.get("username")
