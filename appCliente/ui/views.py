@@ -18,8 +18,8 @@ kong_ip = "10.128.0.22:8000"
 
 
 def home(request):
-    print(request)
-    print("h")
+    print(getRole(request))
+
     return render(request, "ui/home.html")
 
 
