@@ -157,7 +157,7 @@ def getDoctors(request):
 
             return render(request, "ui/doctorNoDisp.html", response.json())
     else:
-        return HttpResponse("Unauthorized Access")
+        return render(request, "ui/unauthorizedUser.html")
 
 
 def getDoctorsBySede(request, sede_id):
