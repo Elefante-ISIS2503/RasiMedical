@@ -218,7 +218,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th colspan="9">
+                            <th colspan="8">
                                 <center>
                                     <b>Ultimas 5 sedes añadidas al sistema</b>
                                 </center>
@@ -230,7 +230,6 @@
                             <th>Ciudad</th>
                             <th>dirección</th>
                             <th>Telefono</th>
-                            <th>Id's doctores asignados</th>
                             <th>Ver profesionales de la sede</th>
                         </tr>
                     </thead>
@@ -242,7 +241,6 @@
                             <td>{{ sede.city }}</td>
                             <td>{{ sede.address }}</td>
                             <td>{{ sede.phone }}</td>
-                            <td>{{ sede.medics }}</td>
                             <td>
                                 <a href="getDoctorsBySede/{{ sede.id }}" class="btn btn-secondary">Ver profesionales</a>
                             </td>
