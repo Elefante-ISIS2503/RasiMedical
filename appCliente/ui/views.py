@@ -119,7 +119,7 @@ def submitDoctor(request):
 def getDoctors(request):
     role = getRole(request)
     if role == None:
-        return HttpResponse("Unauthenticated User")
+        return render(request, "ui/unauthenticatedUser.html")
     
     elif role == "Doctor" or role == "Admin":
         url = f"http://{kong_ip}/postDoctors"
@@ -208,10 +208,6 @@ def getDoctorsBySede(request, sede_id):
 
 
 def getSedes(request):
-    role = getRole(request)
-    if role == None:
-        return HttpResponse("Unauthenticated User")
-
     print("Buscando sedes...")
     url = f"http://{kong_ip}/sedes/"
     response = requests.get(url)
@@ -312,9 +308,6 @@ def InventarioSearchFront(request):
 
 
 def getInventario(request):
-    role = getRole(request)
-    if role == None:
-        return HttpResponse("unauthenticated User")
     
     url = f"http://{kong_ip}/postInventarios"
     response = requests.get(url)
