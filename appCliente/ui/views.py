@@ -22,23 +22,14 @@ def home(request):
 
 
 def newDoctor(request):
-    if getRole(request) == None:
-        return HttpResponse("unauthenticated User")
-    
     return render(request, "ui/newDoctor.html")
 
 
 def newInventario(request):
-    if getRole(request) == None:
-        return HttpResponse("unauthenticated User")
-
     return render(request, "ui/newInventario.html")
 
 
 def newSede(request):
-    if getRole(request) == None:
-        return HttpResponse("unauthenticated User")
-
     return render(request, "ui/newSede.html")
 
 
@@ -310,6 +301,9 @@ def InventarioSearchFront(request):
 
 
 def getInventario(request):
+    if getRole(request) == None:
+        return HttpResponse("unauthenticated User")
+    
     url = f"http://{kong_ip}/postInventarios"
     response = requests.get(url)
 
