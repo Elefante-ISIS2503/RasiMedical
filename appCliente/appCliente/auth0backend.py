@@ -29,14 +29,17 @@ class Auth0(BaseOAuth2):
     
 def getRole(request):
     auth0Domain = "isis2503-elsergiooliveros.us.auth0.com"
-
-    user = request.user 
-    auth0user = user.social_auth.get(provider="auth0")
-    accessToken = auth0user.extra_data['access_token'] 
-    url = f"https://{auth0Domain}/userinfo" 
-    headers = {'authorization': 'Bearer ' + accessToken}
-    resp = requests.get(url, headers=headers)
-    userinfo = resp.json()
-    role = userinfo[f"{auth0Domain}/role"]
-
-    return (role)
+    
+    try:
+        user = request.user 
+        auth0user = user.social_auth.get(provider="auth0")
+        accessToken = auth0user.extra_data['access_token'] 
+        url = f"https://{auth0Domain}/userinfo" 
+        headers = {'authorization': 'Bearer ' + accessToken}
+        resp = requests.get(url, headers=headers)
+        userinfo = resp.json()
+        role = userinfo[f"{auth0Domain}/role"]
+        return (role)
+    
+    except:
+        return None

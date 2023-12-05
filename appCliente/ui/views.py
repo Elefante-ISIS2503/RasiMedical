@@ -3,7 +3,7 @@ import requests
 import smtplib
 import ssl
 from email.message import EmailMessage
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from appCliente.auth0backend import getRole
 
 
@@ -18,20 +18,27 @@ kong_ip = "10.128.0.22:8000"
 
 
 def home(request):
-    print(getRole(request))
-
     return render(request, "ui/home.html")
 
 
 def newDoctor(request):
+    if getRole(request) == None:
+        return HttpResponse("unauthenticated User")
+    
     return render(request, "ui/newDoctor.html")
 
 
 def newInventario(request):
+    if getRole(request) == None:
+        return HttpResponse("unauthenticated User")
+
     return render(request, "ui/newInventario.html")
 
 
 def newSede(request):
+    if getRole(request) == None:
+        return HttpResponse("unauthenticated User")
+
     return render(request, "ui/newSede.html")
 
 
