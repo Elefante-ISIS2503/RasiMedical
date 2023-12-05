@@ -4,6 +4,7 @@ import smtplib
 import ssl
 from email.message import EmailMessage
 from django.http import HttpResponseBadRequest
+from appCliente.auth0backend import getRole
 
 
 # Define email sender and receiver
@@ -17,6 +18,7 @@ kong_ip = "10.128.0.22:8000"
 
 
 def home(request):
+    print(getRole())
     return render(request, "ui/home.html")
 
 
