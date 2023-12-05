@@ -117,40 +117,46 @@ def submitDoctor(request):
 
 
 def getDoctors(request):
-    url = f"http://{kong_ip}/postDoctors"
-    response = requests.get(url)
+    role = getRole(request)
+    if role == None:
+        return HttpResponse("unauthenticated User")
+    elif role == "Doctor" or role == "Admin":
+        url = f"http://{kong_ip}/postDoctors"
+        response = requests.get(url)
 
-    if response.status_code == 200:
-        print("Profesionales:")
+        if response.status_code == 200:
+            print("Profesionales:")
 
-        for profesional in response.json()["profesionales"]:
-            print(profesional)
+            for profesional in response.json()["profesionales"]:
+                print(profesional)
 
-        return render(request, "ui/getDoctors.html", response.json())
+            return render(request, "ui/getDoctors.html", response.json())
+        else:
+            print("RESPUESTA FALLIDA")
+
+            # Enviar correo de advertencia
+            subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (USUARIOS)!"
+            body = """
+            HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE USUARIOS.
+            """
+
+            em = EmailMessage()
+            em["From"] = email_sender
+            em["To"] = email_receiver
+            em["Subject"] = subject
+            em.set_content(body)
+
+            # Add SSL (layer of security)
+            context = ssl.create_default_context()
+
+            # Log in and send the email
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+                smtp.login(email_sender, email_password)
+                smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+            return render(request, "ui/doctorNoDisp.html", response.json())
     else:
-        print("RESPUESTA FALLIDA")
-
-        # Enviar correo de advertencia
-        subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (USUARIOS)!"
-        body = """
-        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE USUARIOS.
-        """
-
-        em = EmailMessage()
-        em["From"] = email_sender
-        em["To"] = email_receiver
-        em["Subject"] = subject
-        em.set_content(body)
-
-        # Add SSL (layer of security)
-        context = ssl.create_default_context()
-
-        # Log in and send the email
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-            smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, email_receiver, em.as_string())
-
-        return render(request, "ui/doctorNoDisp.html", response.json())
+        return HttpResponse("Unauthorized Access")
 
 
 def getDoctorsBySede(request, sede_id):
@@ -201,6 +207,9 @@ def getDoctorsBySede(request, sede_id):
 
 
 def getSedes(request):
+    if getRole(request) == None:
+        return HttpResponse("unauthenticated User")
+
     print("Buscando sedes...")
     url = f"http://{kong_ip}/sedes/"
     response = requests.get(url)
