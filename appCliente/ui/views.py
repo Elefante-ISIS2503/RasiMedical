@@ -169,10 +169,10 @@ def getDoctorsBySede(request, sede_id):
 
             response = response.json()
 
-            for doctor in response:
-                print(doctor)
+            # for doctor in response:
+            #     print(doctor)
 
-            print({"profesionales": response, "sede_id": sede_id})
+            # print({"profesionales": response, "sede_id": sede_id})
 
             return render(
                 request,
