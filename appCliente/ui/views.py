@@ -117,28 +117,75 @@ def submitDoctor(request):
 
 
 def getDoctors(request):
+    url = f"http://{kong_ip}/postDoctors"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        print("Profesionales:")
+
+        for profesional in response.json()["profesionales"]:
+            print(profesional)
+
+        return render(request, "ui/getDoctors.html", response.json())
+    else:
+        print("RESPUESTA FALLIDA")
+
+        # Enviar correo de advertencia
+        subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (USUARIOS)!"
+        body = """
+        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE USUARIOS.
+        """
+
+        em = EmailMessage()
+        em["From"] = email_sender
+        em["To"] = email_receiver
+        em["Subject"] = subject
+        em.set_content(body)
+
+        # Add SSL (layer of security)
+        context = ssl.create_default_context()
+
+        # Log in and send the email
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+        return render(request, "ui/doctorNoDisp.html", response.json())
+
+def getDoctorsBySede(request, sede_id):
+
     role = getRole(request)
     if role == None:
         return render(request, "ui/unauthenticatedUser.html")
-    
-    elif role == "Doctor" or role == "Admin":
-        url = f"http://{kong_ip}/postDoctors"
+        
+    elif role == "Admin":
+        print("Buscando doctores por sede...")
+        url = f"http://{kong_ip}/sedes/{sede_id}/doctors"
         response = requests.get(url)
+        
 
         if response.status_code == 200:
-            print("Profesionales:")
+            print("Doctores:")
 
-            for profesional in response.json()["profesionales"]:
-                print(profesional)
+            response = response.json()
 
-            return render(request, "ui/getDoctors.html", response.json())
+            for doctor in response:
+                print(doctor)
+
+            print({"profesionales": response, "sede_id": sede_id})
+
+            return render(
+                request,
+                "ui/getDoctorsBySede.html",
+                {"profesionales": response, "sede_id": sede_id},
+            )
         else:
             print("RESPUESTA FALLIDA")
 
             # Enviar correo de advertencia
-            subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (USUARIOS)!"
+            subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (DOCTORES)!"
             body = """
-            HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE USUARIOS.
+            HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE DOCTORES.
             """
 
             em = EmailMessage()
@@ -158,53 +205,6 @@ def getDoctors(request):
             return render(request, "ui/doctorNoDisp.html", response.json())
     else:
         return render(request, "ui/unauthorizedUser.html")
-
-
-def getDoctorsBySede(request, sede_id):
-    print("Buscando doctores por sede...")
-    url = f"http://{kong_ip}/sedes/{sede_id}/doctors"
-    response = requests.get(url)
-    
-
-    if response.status_code == 200:
-        print("Doctores:")
-
-        response = response.json()
-
-        for doctor in response:
-            print(doctor)
-
-        print({"profesionales": response, "sede_id": sede_id})
-
-        return render(
-            request,
-            "ui/getDoctorsBySede.html",
-            {"profesionales": response, "sede_id": sede_id},
-        )
-    else:
-        print("RESPUESTA FALLIDA")
-
-        # Enviar correo de advertencia
-        subject = "SE ACABA DE CAER UN SERVICIO EN RASI MEDICAL (DOCTORES)!"
-        body = """
-        HOLY MACARRONI: OJO PUES SE MURIO EL MANEJADOR DE DOCTORES.
-        """
-
-        em = EmailMessage()
-        em["From"] = email_sender
-        em["To"] = email_receiver
-        em["Subject"] = subject
-        em.set_content(body)
-
-        # Add SSL (layer of security)
-        context = ssl.create_default_context()
-
-        # Log in and send the email
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-            smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, email_receiver, em.as_string())
-
-        return render(request, "ui/doctorNoDisp.html", response.json())
 
 
 def getSedes(request):
