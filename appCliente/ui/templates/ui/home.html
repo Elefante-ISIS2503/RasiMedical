@@ -157,13 +157,13 @@
                 <h3 class="masthead-brand"> </h3>
                 <nav class="nav nav-masthead justify-content-center">
                     <!-- makes a clickable link -->
-                    <a class="nav-link active" href="home">Home</a>
+                    <a class="nav-link active" href="/home">Home</a>
                     <!-- makes a clickable link -->
-                    <a class="nav-link" href="getDoctors">Médicos</a>
+                    <a class="nav-link" href="/getDoctors">Médicos</a>
                     <!-- makes a clickable link -->
-                    <a class="nav-link" href="getInventario">Recursos</a>
+                    <a class="nav-link" href="/getInventario">Recursos</a>
                     <!-- makes a clickable link -->
-                    <a class="nav-link" href="getSedes">Sedes</a>
+                    <a class="nav-link" href="/getSedes">Sedes</a>
                     <!-- makes a clickable link -->
                     {% if user.is_authenticated %}
                     <a class="nav-link">{{ user.username }}</a>
@@ -187,17 +187,17 @@
             <br><br>
 
             <p class="lead">
-                <a href="newDoctor" class="btn btn-lg btn-secondary">Añadir profesional de la salud</a>
+                <a href="/newDoctor" class="btn btn-lg btn-secondary">Añadir profesional de la salud</a>
 
                 <!-- leaves 20 px of vertical space-->
                 <br><br>
 
-                <a href="newInventario" class="btn btn-lg btn-secondary">Añadir recurso de inventario</a>
+                <a href="/newInventario" class="btn btn-lg btn-secondary">Añadir recurso de inventario</a>
 
                 <!-- leaves 20 px of vertical space-->
                 <br><br>
 
-                <a href="newSede" class="btn btn-lg btn-secondary">Añadir una Sede Medica</a>
+                <a href="/newSede" class="btn btn-lg btn-secondary">Añadir una Sede Medica</a>
             </p>
         </main>
 
