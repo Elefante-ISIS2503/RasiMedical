@@ -19,7 +19,7 @@ let kong_ip = "10.128.0.22:8000"
 // Create a sede
 router.post('/', async (req, res) => {
     console.log("Registrando sede...");
-    console.log(req.body);
+    // console.log(req.body);
 
     // Create a new sede
     const sede = new Sede({
@@ -37,9 +37,9 @@ router.post('/', async (req, res) => {
     let doctorsExist = true;
 
     // imprime los id's de los doctores encontrados
-    for (let i = 0; i < doctors.length; i++) {
-        console.log(doctors[i].id.toString());
-    }
+    // for (let i = 0; i < doctors.length; i++) {
+    //     console.log(doctors[i].id.toString());
+    // }
 
     // for every doctor in the sede, iterate over the doctors array
     // and check if the doctor id is in the doctors array
@@ -131,7 +131,7 @@ router.get('/:id/doctors', async (req, res) => {
             for (let j = 0; j < doctors.length; j++) {
                 if (sede.medics[i].toString() === doctors[j].id.toString()) {
                     sedeDoctors.push(doctors[j]);
-                    console.log(doctors[j]);
+                    // console.log(doctors[j]);
                 }
             }
         }
